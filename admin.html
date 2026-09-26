@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración | Fe y Alegría 14</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/aula.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <link rel="stylesheet" href="css/docente.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("fya14-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="pagina-perfil pagina-admin">
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="nav is-scrolled">
+    <div class="nav__inner adm-ancho">
+      <a href="index.html" class="brand" aria-label="Fe y Alegría 14, inicio">
+        <img class="brand__logo" src="img/logo.png" alt="" width="40" height="50">
+        <span class="brand__text" translate="no">Fe y Alegría 14<small>Administración</small></span>
+      </a>
+      <div class="nav__actions">
+        <span class="adm-quien" id="admQuien"></span>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro u oscuro"><i class="ph ph-moon" aria-hidden="true"></i></button>
+        <button class="btn btn--ghost btn--sm" id="btnSalir" type="button"><i class="ph ph-sign-out" aria-hidden="true"></i><span class="hide-sm">Cerrar sesión</span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="aviso-ejemplo adm-ancho" id="avisoDemo" role="note" hidden>
+    <i class="ph ph-info" aria-hidden="true"></i>
+    <p><strong>Demostración.</strong> Datos ficticios. Los cambios se guardan solo en esta pestaña.</p>
+  </div>
+
+  <div class="adm-ancho perfil-cargando" id="cargando" role="status"><span class="giro" aria-hidden="true"></span> Cargando administración…</div>
+  <div class="adm-ancho perfil-vacio" id="vacio" hidden>
+    <i class="ph ph-shield-warning" aria-hidden="true"></i>
+    <h1 id="vacioTitulo">Sin acceso</h1>
+    <p id="vacioTexto"></p>
+    <div class="perfil-vacio__acciones"><button class="btn btn--primary" type="button" data-salir>Cambiar de cuenta</button><a class="btn btn--ghost" href="index.html">Ir a la web del colegio</a></div>
+  </div>
+
+  <div class="adm adm-ancho" id="app" hidden>
+    <!-- Menú lateral -->
+    <nav class="adm-menu" aria-label="Secciones de administración" id="admMenu">
+      <a href="#estudiantes" data-vista="estudiantes"><i class="ph ph-student" aria-hidden="true"></i><span>Estudiantes</span><b id="nEst"></b></a>
+      <a href="#docentes" data-vista="docentes"><i class="ph ph-chalkboard-teacher" aria-hidden="true"></i><span>Docentes</span><b id="nDoc"></b></a>
+      <a href="#accesos" data-vista="accesos"><i class="ph ph-key" aria-hidden="true"></i><span>Accesos</span><b id="nAdm"></b></a>
+      <a href="#importar" data-vista="importar"><i class="ph ph-upload-simple" aria-hidden="true"></i><span>Importar</span></a>
+      <hr>
+      <a href="comunidad.html" class="adm-menu__ext"><i class="ph ph-users-three" aria-hidden="true"></i><span>El Patio</span></a>
+      <a href="index.html" class="adm-menu__ext"><i class="ph ph-globe" aria-hidden="true"></i><span>Web del colegio</span></a>
+    </nav>
+
+    <main class="adm-main" id="main" tabindex="-1">
+      <!-- ============ ESTUDIANTES: LISTA ============ -->
+      <section class="adm-vista" id="v-estudiantes" aria-labelledby="tEst" hidden>
+        <header class="adm-cab">
+          <div><h1 id="tEst">Estudiantes</h1><p id="estResumen"></p></div>
+          <div class="adm-cab__acc">
+            <button class="btn btn--ghost btn--sm" type="button" id="exportEst"><i class="ph ph-download-simple" aria-hidden="true"></i>Exportar CSV</button>
+            <button class="btn btn--primary btn--sm" type="button" id="nuevoEst"><i class="ph ph-plus" aria-hidden="true"></i>Nuevo estudiante</button>
+          </div>
+        </header>
+        <div class="adm-filtros">
+          <div class="field adm-buscar"><label class="sr-only" for="fQ">Buscar</label><div class="input-icon"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input id="fQ" type="search" placeholder="Nombre, apellido, correo o código…" autocomplete="off"></div></div>
+          <div class="field"><label class="sr-only" for="fNivel">Nivel</label><select id="fNivel"><option value="">Todos los niveles</option><option value="p">Primaria</option><option value="s">Secundaria</option></select></div>
+          <div class="field"><label class="sr-only" for="fGrado">Grado</label><select id="fGrado"><option value="">Todos los grados</option></select></div>
+          <div class="field"><label class="sr-only" for="fSec">Sección</label><select id="fSec"><option value="">Todas las secciones</option><option>A</option><option>B</option><option>C</option><option>D</option></select></div>
+          <div class="field"><label class="sr-only" for="fAlerta">Situación</label><select id="fAlerta"><option value="">Cualquier situación</option><option value="alerta">Con alerta de asistencia</option><option value="sinfoto">Sin foto</option><option value="c">Con alguna nota C</option></select></div>
+        </div>
+        <div class="notas-wrap"><table class="notas adm-tabla" id="tablaEst"></table></div>
+        <div class="adm-pag" id="pagEst"></div>
+      </section>
+
+      <!-- ============ ESTUDIANTE: FICHA ============ -->
+      <section class="adm-vista" id="v-ficha" aria-labelledby="fNombre" hidden>
+        <a class="link adm-volver" href="#estudiantes"><i class="ph ph-arrow-left" aria-hidden="true"></i> Todos los estudiantes</a>
+        <header class="ficha-cab">
+          <div class="ficha-foto">
+            <span class="ficha-foto__img" id="fFoto"></span>
+            <input type="file" id="inFoto" accept="image/jpeg,image/png,image/webp" hidden>
+            <div class="ficha-foto__acc">
+              <button type="button" class="btn btn--ghost btn--sm" id="subirFoto"><i class="ph ph-camera" aria-hidden="true"></i>Subir foto</button>
+              <button type="button" class="link" id="quitarFoto" hidden>Quitar foto</button>
+            </div>
+          </div>
+          <div class="ficha-cab__txt">
+            <h1 id="fNombre">Nuevo estudiante</h1>
+            <p id="fSub"></p>
+            <ul class="doc-conteo" id="fResumen"></ul>
+          </div>
+          <div class="ficha-cab__acc">
+            <a class="btn btn--ghost btn--sm" id="verPerfilPub" href="#" hidden><i class="ph ph-users-three" aria-hidden="true"></i>Ver en El Patio</a>
+            <button type="button" class="btn btn--ghost btn--sm adm-peligro" id="borrarEst"><i class="ph ph-trash" aria-hidden="true"></i>Eliminar</button>
+          </div>
+        </header>
+
+        <div class="doc-tabs" role="tablist" aria-label="Ficha del estudiante" id="fichaTabs">
+          <button role="tab" type="button" aria-controls="ft-datos" id="ftb-datos"><i class="ph ph-identification-card" aria-hidden="true"></i>Datos</button>
+          <button role="tab" type="button" aria-controls="ft-notas" id="ftb-notas"><i class="ph ph-exam" aria-hidden="true"></i>Notas</button>
+          <button role="tab" type="button" aria-controls="ft-asis" id="ftb-asis"><i class="ph ph-calendar-check" aria-hidden="true"></i>Asistencia</button>
+        </div>
+
+        <!-- Datos -->
+        <form class="doc-panel ficha-form" role="tabpanel" id="ft-datos" aria-labelledby="ftb-datos" novalidate>
+          <fieldset>
+            <legend>Estudiante</legend>
+            <div class="ficha-grid">
+              <div class="field"><label for="dNombres">Nombres</label><input id="dNombres" name="nombres" required autocomplete="off"></div>
+              <div class="field"><label for="dApellidos">Apellidos</label><input id="dApellidos" name="apellidos" required autocomplete="off"></div>
+              <div class="field"><label for="dCorreo">Correo institucional</label><input id="dCorreo" name="correo" type="email" required autocomplete="off"><small class="help" id="dCorreoAyuda">Con este correo entra a la intranet. No se puede cambiar después de crear.</small></div>
+              <div class="field"><label for="dCodigo">Código</label><input id="dCodigo" name="codigo" autocomplete="off"></div>
+              <div class="field"><label for="dDni">DNI</label><input id="dDni" name="dni" inputmode="numeric" maxlength="8" pattern="[0-9]{8}" autocomplete="off"></div>
+              <div class="field"><label for="dNac">Fecha de nacimiento</label><input id="dNac" name="nacimiento" type="date"></div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Aula</legend>
+            <div class="ficha-grid ficha-grid--3">
+              <div class="field"><label for="dNivel">Nivel</label><select id="dNivel" name="nivel"><option value="p">Primaria</option><option value="s">Secundaria</option></select></div>
+              <div class="field"><label for="dGrado">Grado</label><select id="dGrado" name="grado"></select></div>
+              <div class="field"><label for="dSeccion">Sección</label><select id="dSeccion" name="seccion"><option>A</option><option>B</option><option>C</option><option>D</option></select></div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Apoderado</legend>
+            <div class="ficha-grid">
+              <div class="field"><label for="dApod">Nombre del apoderado</label><input id="dApod" name="apoderado" autocomplete="off"></div>
+              <div class="field"><label for="dParent">Parentesco</label><select id="dParent" name="parentesco"><option value="">Sin indicar</option><option>Madre</option><option>Padre</option><option>Abuela</option><option>Abuelo</option><option>Tía</option><option>Tío</option><option>Otro</option></select></div>
+              <div class="field"><label for="dTel">Celular</label><input id="dTel" name="telefono" type="tel" inputmode="tel" pattern="9[0-9]{8}" autocomplete="off"></div>
+              <div class="field"><label for="dDir">Dirección</label><input id="dDir" name="direccion" autocomplete="off"></div>
+            </div>
+            <div class="field"><label for="dObs">Observaciones internas</label><textarea id="dObs" name="observaciones" rows="3"></textarea><small class="help">Solo la ve la administración.</small></div>
+          </fieldset>
+          <p class="compositor__error" id="dError" role="alert"></p>
+        </form>
+
+        <!-- Notas -->
+        <div class="doc-panel" role="tabpanel" id="ft-notas" aria-labelledby="ftb-notas" hidden>
+          <p class="doc-barra__estado">Todas las áreas de su nivel. Los cambios se guardan con el botón Guardar.</p>
+          <div class="notas-wrap"><table class="notas doc-notas" id="fNotas"></table></div>
+        </div>
+
+        <!-- Asistencia -->
+        <div class="doc-panel" role="tabpanel" id="ft-asis" aria-labelledby="ftb-asis" hidden>
+          <div class="asis-adm">
+            <div class="calendario card">
+              <div class="calendario__cab">
+                <button class="icon-btn" type="button" id="aMesAnt" aria-label="Mes anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+                <h2 id="aMes" aria-live="polite"></h2>
+                <button class="icon-btn" type="button" id="aMesSig" aria-label="Mes siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+              </div>
+              <div class="calendario__dias" aria-hidden="true"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span></div>
+              <ol class="calendario__grid" id="aGrid"></ol>
+              <ul class="leyenda-asis"><li><span class="punto punto--P"></span>Asistió</li><li><span class="punto punto--T"></span>Tardanza</li><li><span class="punto punto--F"></span>Falta</li><li><span class="punto punto--J"></span>Justificada</li></ul>
+            </div>
+            <form class="dia-edit card" id="diaEdit" novalidate>
+              <p class="dia-detalle__fecha" id="deFecha">Elige un día del calendario</p>
+              <div class="field"><label for="deEstado">Estado</label>
+                <select id="deEstado"><option value="">Sin registro</option><option value="P">Asistió</option><option value="T">Tardanza</option><option value="F">Falta</option><option value="J">Falta justificada</option></select></div>
+              <div class="field" id="deHoraF"><label for="deHora">Hora de entrada</label><input id="deHora" type="time"></div>
+              <fieldset id="deJust" hidden>
+                <legend>Justificación</legend>
+                <div class="field"><label for="deMotivo">Motivo</label><input id="deMotivo" maxlength="150"></div>
+                <div class="form__row">
+                  <div class="field"><label for="dePres">Presentada</label><input id="dePres" type="date"></div>
+                  <div class="field"><label for="deJEst">Estado</label><select id="deJEst"><option value="">Sin justificación</option><option value="pendiente">En revisión</option><option value="aprobada">Aprobada</option><option value="observada">Observada</option></select></div>
+                </div>
+                <div class="field"><label for="dePor">Presentada por</label><input id="dePor" maxlength="60" placeholder="Madre de familia…"></div>
+                <div class="field"><label for="deObs">Respuesta del colegio</label><input id="deObs" maxlength="300"></div>
+              </fieldset>
+              <button class="btn btn--ghost btn--sm" type="submit" id="deAplicar" disabled><i class="ph ph-check" aria-hidden="true"></i>Aplicar al día</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DOCENTES ============ -->
+      <section class="adm-vista" id="v-docentes" aria-labelledby="tDoc" hidden>
+        <header class="adm-cab">
+          <div><h1 id="tDoc">Docentes</h1><p>Aulas donde es tutor y áreas que dicta. Esto decide qué puede ver y cambiar en su portal.</p></div>
+          <div class="adm-cab__acc"><button class="btn btn--primary btn--sm" type="button" id="nuevoDoc"><i class="ph ph-plus" aria-hidden="true"></i>Nuevo docente</button></div>
+        </header>
+        <div class="adm-filtros"><div class="field adm-buscar"><label class="sr-only" for="dQ">Buscar docente</label><div class="input-icon"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input id="dQ" type="search" placeholder="Nombre o correo…" autocomplete="off"></div></div></div>
+        <div class="notas-wrap"><table class="notas adm-tabla" id="tablaDoc"></table></div>
+      </section>
+
+      <section class="adm-vista" id="v-docente" aria-labelledby="dtNombre" hidden>
+        <a class="link adm-volver" href="#docentes"><i class="ph ph-arrow-left" aria-hidden="true"></i> Todos los docentes</a>
+        <header class="ficha-cab ficha-cab--doc">
+          <span class="ficha-foto__img" id="dtAvatar"></span>
+          <div class="ficha-cab__txt"><h1 id="dtNombre">Nuevo docente</h1><p id="dtSub"></p></div>
+          <div class="ficha-cab__acc"><button type="button" class="btn btn--ghost btn--sm adm-peligro" id="borrarDoc"><i class="ph ph-trash" aria-hidden="true"></i>Eliminar</button></div>
+        </header>
+        <form class="ficha-form" id="formDoc" novalidate>
+          <fieldset>
+            <legend>Docente</legend>
+            <div class="ficha-grid">
+              <div class="field"><label for="tNombres">Nombres</label><input id="tNombres" required autocomplete="off"></div>
+              <div class="field"><label for="tApellidos">Apellidos</label><input id="tApellidos" required autocomplete="off"></div>
+              <div class="field"><label for="tCorreo">Correo institucional</label><input id="tCorreo" type="email" required autocomplete="off"></div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Tutoría</legend>
+            <p class="help">Aulas donde registra asistencia y revisa justificaciones.</p>
+            <div class="aulas-chips" id="tTutor"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Áreas que dicta</legend>
+            <div id="tAreas" class="asig-lista"></div>
+            <button type="button" class="link" id="tAgregar"><i class="ph ph-plus" aria-hidden="true"></i> Agregar aula</button>
+          </fieldset>
+          <p class="compositor__error" id="tError" role="alert"></p>
+        </form>
+      </section>
+
+      <!-- ============ ACCESOS ============ -->
+      <section class="adm-vista" id="v-accesos" aria-labelledby="tAcc" hidden>
+        <header class="adm-cab"><div><h1 id="tAcc">Accesos</h1><p>Quién puede entrar y con qué permisos. Solo entran cuentas @<span data-dominio></span>.</p></div></header>
+        <div class="accesos">
+          <article class="acc-card">
+            <i class="ph ph-student" aria-hidden="true"></i><strong id="accEst">0</strong><span>estudiantes registrados</span>
+            <p>Entran a su perfil (notas, asistencia, horario) y a El Patio. Se agregan en Estudiantes o Importar.</p>
+          </article>
+          <article class="acc-card">
+            <i class="ph ph-chalkboard-teacher" aria-hidden="true"></i><strong id="accDoc">0</strong><span>docentes registrados</span>
+            <p>Entran al portal docente con permisos por aula. Se agregan en Docentes o Importar.</p>
+          </article>
+          <article class="acc-card acc-card--adm">
+            <i class="ph ph-shield-check" aria-hidden="true"></i><strong id="accAdm">0</strong><span>cuentas de administración</span>
+            <p>Ven y cambian todo. Dales acceso solo a quien lo necesite.</p>
+          </article>
+        </div>
+        <h2 class="adm-h2">Cuentas de administración</h2>
+        <form class="acc-form" id="formAdm" novalidate>
+          <div class="field"><label for="aCorreo">Correo institucional</label><input id="aCorreo" type="email" required placeholder="nombre@feyalegria14.edu.pe" autocomplete="off"></div>
+          <div class="field"><label for="aNombre">Nombre y cargo</label><input id="aNombre" placeholder="Ej.: Dirección, Secretaría…" autocomplete="off"></div>
+          <button class="btn btn--primary btn--sm" type="submit"><i class="ph ph-plus" aria-hidden="true"></i>Dar acceso</button>
+          <p class="compositor__error" id="aError" role="alert"></p>
+        </form>
+        <ul class="adm-lista" id="listaAdm"></ul>
+      </section>
+
+      <!-- ============ IMPORTAR ============ -->
+      <section class="adm-vista" id="v-importar" aria-labelledby="tImp" hidden>
+        <header class="adm-cab"><div><h1 id="tImp">Importar desde Excel</h1><p>Guarda la hoja como CSV y súbela aquí. Se revisa todo antes de guardar; si hay errores no se carga nada.</p></div></header>
+        <div class="imp-tipos" role="radiogroup" aria-label="Qué vas a importar">
+          <label><input type="radio" name="impTipo" value="est" checked><span><i class="ph ph-student" aria-hidden="true"></i>Estudiantes</span></label>
+          <label><input type="radio" name="impTipo" value="doc"><span><i class="ph ph-chalkboard-teacher" aria-hidden="true"></i>Docentes</span></label>
+        </div>
+        <div class="imp-zona" id="impZona">
+          <i class="ph ph-file-csv" aria-hidden="true"></i>
+          <p><strong>Arrastra el archivo CSV aquí</strong> o <button type="button" class="link" id="impElegir">elígelo desde tu computadora</button></p>
+          <p class="help" id="impCols"></p>
+          <button type="button" class="link" id="impPlantilla"><i class="ph ph-download-simple" aria-hidden="true"></i> Descargar plantilla</button>
+          <input type="file" id="impArchivo" accept=".csv,text/csv" hidden>
+        </div>
+        <div id="impResultado" hidden>
+          <p class="doc-barra__estado" id="impResumen"></p>
+          <ul class="imp-errores" id="impErrores"></ul>
+          <div class="notas-wrap"><table class="notas adm-tabla" id="impVista"></table></div>
+          <div class="imp-acc"><button type="button" class="btn btn--ghost btn--sm" id="impCancelar">Cancelar</button><button type="button" class="btn btn--primary btn--sm" id="impConfirmar"><i class="ph ph-upload-simple" aria-hidden="true"></i><span></span></button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Barra de guardado -->
+  <div class="guardar-barra" id="guardarBarra" hidden>
+    <div class="adm-ancho guardar-barra__in">
+      <p><i class="ph ph-pencil-simple" aria-hidden="true"></i><span id="guardarTexto">Cambios sin guardar</span></p>
+      <div>
+        <button class="btn btn--ghost btn--sm" type="button" id="descartar">Descartar</button>
+        <button class="btn btn--primary btn--sm" type="button" id="guardar"><i class="ph ph-floppy-disk" aria-hidden="true"></i>Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/sesion.js"></script>
+  <script src="js/data-aulas.js"></script>
+  <script src="js/calendario.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

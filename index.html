@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fe y Alegría 14 | Nuevo Chimbote</title>
+  <meta name="description" content="I.E. Fe y Alegría 14, Nuevo Chimbote. Resultados de Admisión 2026, primaria y secundaria, infraestructura, admisión y contacto.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/aula.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("fya14-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    // La pantalla de entrada se ve una sola vez por sesión
+    try { if (sessionStorage.getItem("fya14-intro")) document.documentElement.classList.add("no-intro"); else sessionStorage.setItem("fya14-intro", "1"); } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <div class="intro" aria-hidden="true">
+    <div class="intro__inner">
+      <span class="intro__logo"><img src="img/logo.png" alt="" width="92" height="115"></span>
+      <i class="intro__bar"></i>
+      <span class="intro__name" translate="no"><span style="--i:0">I</span><span style="--i:1">.</span><span style="--i:2">E</span><span style="--i:3">.</span><span style="--i:4"> </span><b><span style="--i:5">F</span><span style="--i:6">e</span><span style="--i:7"> </span><span style="--i:8">y</span><span style="--i:9"> </span><span style="--i:10">A</span><span style="--i:11">l</span><span style="--i:12">e</span><span style="--i:13">g</span><span style="--i:14">r</span><span style="--i:15">í</span><span style="--i:16">a</span></b><span style="--i:17"> </span><span style="--i:18">N</span><span style="--i:19">°</span><span style="--i:20"> </span><span style="--i:21">1</span><span style="--i:22">4</span></span>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+
+  <!-- 1. MENÚ -->
+  <header class="nav">
+    <div class="nav__inner container">
+      <a href="#inicio" class="brand" aria-label="Fe y Alegría 14, inicio">
+        <img class="brand__logo" src="img/logo.png" alt="" width="40" height="50">
+        <span class="brand__text" translate="no">Fe y Alegría 14<small>Nuevo Chimbote</small></span>
+      </a>
+      <nav class="nav__links" id="menu" aria-label="Principal">
+        <a href="#nosotros" style="--n:0">Nosotros</a>
+        <a href="#niveles" style="--n:1">Niveles</a>
+        <a href="#aulas" style="--n:2">Aulas</a>
+        <a href="#admision" style="--n:3">Admisión</a>
+        <a href="#vida" style="--n:4">Noticias</a>
+        <a href="#contacto" style="--n:5">Contacto</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro u oscuro"><i class="ph ph-moon" aria-hidden="true"></i></button>
+        <a class="icon-btn" href="login.html" aria-label="Intranet de estudiantes y docentes" title="Intranet"><i class="ph ph-user-circle" aria-hidden="true"></i></a>
+        <a href="#ingresantes" class="btn btn--primary btn--sm hide-sm hide-md">Buscar ingresante</a>
+        <button class="icon-btn burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- 2. PORTADA: fotos reales del colegio, nítidas al frente y desenfocadas de fondo -->
+    <section class="hero portada" id="inicio" aria-label="Portada">
+      <div class="portada__fondo" aria-hidden="true">
+        <img class="is-active" src="img/colegio-3.jpg" width="596" height="335" alt="">
+        <img class="" src="img/colegio-1.jpg" width="615" height="325" alt="">
+        <img class="" src="img/colegio-2.jpg" width="596" height="335" alt="">
+      </div>
+      <div class="container portada__grid">
+        <div class="portada__copy">
+          <p class="portada__lugar load" style="--d:0"><img src="img/logo.png" alt="" width="28" height="35"><span><span translate="no">I.E. Fe y Alegría 14</span>, Nuevo Chimbote</span></p>
+          <h1 class="load" style="--d:1">Educar con fe, <span class="h1-light">crecer con alegría.</span></h1>
+          <p class="hero__sub load" style="--d:2">Primaria por la mañana, secundaria por la tarde. Un solo local, una misma comunidad.</p>
+          <div class="hero__cta load" style="--d:3">
+            <a href="#ingresantes" class="btn btn--primary">Buscar ingresante</a>
+            <a href="#admision" class="btn btn--claro">Pedir información</a>
+          </div>
+        </div>
+        <div class="portada__galeria load" style="--d:2">
+          <div class="pila" id="pila" aria-roledescription="carrusel" aria-label="Fotos del colegio">
+          <figure class="tarjeta" data-pos="0">
+            <img src="img/colegio-3.jpg" width="596" height="335" alt="Patio principal bajo el techo en arco, con estudiantes en formación" fetchpriority="high">
+            <figcaption>Patio principal</figcaption>
+          </figure>
+          <figure class="tarjeta" data-pos="1">
+            <img src="img/colegio-1.jpg" width="615" height="325" alt="Patio techado del colegio con palmera y aulas de ladrillo" loading="lazy">
+            <figcaption>Patio techado</figcaption>
+          </figure>
+          <figure class="tarjeta" data-pos="2">
+            <img src="img/colegio-2.jpg" width="596" height="335" alt="Vista aérea del colegio y su losa deportiva techada" loading="lazy">
+            <figcaption>Vista aérea</figcaption>
+          </figure>
+          </div>
+          <div class="portada-control">
+            <div class="portada-control__puntos" role="group" aria-label="Elegir foto">
+              <button type="button" class="is-active" aria-label="Foto 1: patio principal" aria-pressed="true"><span></span></button>
+              <button type="button" aria-label="Foto 2: patio techado" aria-pressed="false"><span></span></button>
+              <button type="button" aria-label="Foto 3: vista aérea" aria-pressed="false"><span></span></button>
+            </div>
+            <p class="portada-control__cuenta" aria-hidden="true"><b id="pilaN">1</b> / 3</p>
+            <button type="button" class="portada-control__pausa" id="portadaPausa" aria-pressed="false" aria-label="Pausar fotos"><i class="ph ph-pause" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. BUSCADOR DE INGRESANTES -->
+    <section class="section" id="ingresantes">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Resultados de Admisión 2026</h2>
+          <p>Lista oficial de ingresantes a primer grado de primaria. Busca por apellido o nombre.</p>
+        </header>
+
+        <div class="search-panel card reveal" data-reveal="zoom">
+          <div class="search-panel__head">
+            <div class="field">
+              <label for="admQ">Busca a tu hijo o hija</label>
+              <div class="input-icon"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input id="admQ" name="buscar-ingresante" type="search" placeholder="Ej.: Quispe…" autocomplete="off" spellcheck="false"></div>
+            </div>
+            <p class="result-count" id="admCount" aria-live="polite"></p>
+          </div>
+          <nav class="alpha" id="alphaNav" aria-label="Ir a letra"></nav>
+          <div class="hallazgo" id="admHallazgo" aria-live="polite"><div class="hallazgo__in"><div class="hallazgo__card"><span class="hallazgo__icono" aria-hidden="true"><i class="ph ph-seal-check"></i></span><div class="hallazgo__txt"><strong id="hallazgoTit"></strong><span id="hallazgoTxt"></span></div></div></div></div>
+          <div class="groups" id="admGroups"></div>
+          <div class="empty" id="admEmpty" hidden>
+            <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+            <h3>Sin coincidencias</h3>
+            <p>Revisa la ortografía o busca solo por apellido paterno.</p>
+          </div>
+        </div>
+
+        <details class="process">
+          <summary>Ver datos del proceso <i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <div class="process__body">
+            <div class="kpis" id="admKpis"></div>
+            <div class="analysis">
+              <article class="panel panel--chart card spot">
+                <h4>Ingresantes por inicial del apellido</h4>
+                <p class="panel__note" id="letterInsight"></p>
+                <div class="bars" id="letterBars" role="group" aria-label="Gráfico de ingresantes por letra inicial del apellido paterno"></div>
+              </article>
+              <article class="panel panel--surnames card spot">
+                <h4>Apellidos más frecuentes</h4>
+                <p class="panel__note">Contando apellido paterno y materno.</p>
+                <ol class="rank" id="topSurnames"></ol>
+              </article>
+              <article class="panel panel--names card spot">
+                <h4>Nombres más frecuentes</h4>
+                <p class="panel__note">Primer nombre de cada ingresante.</p>
+                <ol class="rank" id="topNames"></ol>
+              </article>
+              <article class="panel panel--donut card spot">
+                <h4>Cómo se llaman</h4>
+                <div class="donut-wrap">
+                  <div class="donut" id="nameDonut"><span id="donutLabel"></span></div>
+                  <ul class="legend" id="nameLegend"></ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Franja de valores -->
+    <section class="values-band" aria-label="Nuestros valores">
+      <button class="marquee__toggle" type="button" aria-pressed="false" aria-label="Pausar la franja de valores"><i class="ph ph-pause" aria-hidden="true"></i></button>
+      <div class="marquee"><div class="marquee__track" id="marqueeTrack"></div></div>
+    </section>
+
+    <!-- 4. NOSOTROS + CIFRAS -->
+    <section class="section about" id="nosotros">
+      <div class="container about__grid">
+        <div class="about__media reveal" data-reveal="left">
+          <img width="900" height="1125" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=75" data-fallback="fya14-docente" alt="Docente dirigiendo una clase frente a la pizarra" loading="lazy">
+          <blockquote class="about__quote card">
+            <i class="ph ph-quotes" aria-hidden="true"></i>
+            <p>“Fe y Alegría comienza donde termina el asfalto.”</p>
+            <span>Lema del movimiento Fe y Alegría</span>
+          </blockquote>
+        </div>
+        <div class="about__copy">
+          <header class="section-head reveal">
+            <h2>Una escuela de Fe y Alegría en Nuevo Chimbote</h2>
+            <p>Institución pública de gestión privada, en convenio con el Sector Educación y promovida por las Carmelitas Misioneras en el A.H. 3 de Octubre.</p>
+          </header>
+          <div class="tabs reveal" role="tablist" aria-label="Identidad institucional">
+            <button class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-mision" id="t-mision">Misión</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-vision" id="t-vision" tabindex="-1">Visión</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-valores" id="t-valores" tabindex="-1">Valores</button>
+            <span class="tab__ink" aria-hidden="true"></span>
+          </div>
+          <div class="tab-panels reveal">
+            <div class="tab-panel" role="tabpanel" id="tab-mision" aria-labelledby="t-mision">
+              <p>Ofrecer una educación popular integral y de calidad a niños, niñas y jóvenes de Nuevo Chimbote, formando personas solidarias y comprometidas con su comunidad.</p>
+            </div>
+            <div class="tab-panel" role="tabpanel" id="tab-vision" aria-labelledby="t-vision" hidden>
+              <p>Ser una comunidad educativa que transforma su entorno desde la fe, la justicia y la alegría de aprender, como parte de la red Fe y Alegría del Perú.</p>
+            </div>
+            <div class="tab-panel" role="tabpanel" id="tab-valores" aria-labelledby="t-valores" hidden>
+              <ul class="values" id="valuesList"></ul>
+            </div>
+          </div>
+          <div class="people">
+            <div class="person card spot reveal" data-reveal="right"><i class="ph ph-user-circle" aria-hidden="true"></i><div><strong>Director</strong><span>Edefir Custodio Viera López</span></div></div>
+            <div class="person card spot reveal" data-reveal="right"><i class="ph ph-church" aria-hidden="true"></i><div><strong>Promotora</strong><span>Congregación Carmelitas Misioneras</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="El colegio en cifras">
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stat reveal" data-reveal="zoom"><strong data-count="1544">1,544</strong><span>estudiantes en total</span></div>
+          <div class="stat reveal" data-reveal="zoom"><strong data-count="790">790</strong><span>en primaria</span></div>
+          <div class="stat reveal" data-reveal="zoom"><strong data-count="754">754</strong><span>en secundaria</span></div>
+          <div class="stat reveal" data-reveal="zoom"><strong data-count="76">76</strong><span>docentes</span></div>
+        </div>
+        <p class="stats__src">Fuente: Padrón y Censo Escolar del MINEDU (primaria, 2025) e Identicole (secundaria).</p>
+      </div>
+    </section>
+
+    <!-- 5. QUÉ OFRECEMOS: NIVELES + INFRAESTRUCTURA -->
+    <section class="section levels" id="niveles">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Dos niveles, dos turnos</h2>
+          <p>Primaria y secundaria comparten local en Mz. F Lote 1, con horarios separados.</p>
+        </header>
+        <div class="level-grid">
+          <article class="tile reveal" data-reveal="zoom">
+            <img width="1100" height="733" src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=75" data-fallback="fya14-primaria" alt="Niños de primaria escribiendo en sus cuadernos" loading="lazy">
+            <div class="tile__body">
+              <h3>Primaria</h3>
+              <p>1.° a 6.° grado en turno mañana. Aula mixta y polidocente completa.</p>
+              <ul class="facts"><li><b>790</b> alumnos</li><li><b>25</b> secciones</li><li><b>31</b> docentes</li></ul>
+              <a class="btn btn--light btn--sm" href="#ingresantes">Buscar ingresante</a>
+            </div>
+          </article>
+          <article class="tile reveal" data-reveal="zoom">
+            <img width="1100" height="733" src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=1100&q=75" data-fallback="fya14-secundaria" alt="Estudiantes de secundaria trabajando en el salón" loading="lazy">
+            <div class="tile__body">
+              <h3>Secundaria</h3>
+              <p>1.° a 5.° año en turno tarde, en convenio con el Estado.</p>
+              <ul class="facts"><li><b>754</b> alumnos</li><li><b>22</b> secciones</li><li><b>45</b> docentes</li></ul>
+              <a class="btn btn--light btn--sm" href="#admision">Pedir información</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="infra">
+          <div class="infra__intro reveal" data-reveal="left">
+            <h3>Infraestructura y recursos</h3>
+            <p>Espacios y equipos registrados en la ficha del colegio en Identicole, del Ministerio de Educación.</p>
+            <img class="infra__img" width="1100" height="688" src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1100&q=75" data-fallback="fya14-biblioteca" alt="Sala de estudio con ventanales" loading="lazy">
+          </div>
+          <ul class="infra__list" id="infraList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5b. PORTAL DE AULAS: una página por grado y sección -->
+    <section class="section" id="aulas">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Portal de aulas</h2>
+          <p>Cada grado y sección tiene su propia página con horario, tareas, comunicados y docentes. Elige tu aula.</p>
+        </header>
+        <div class="aulas-grid">
+          <article class="aulas-nivel reveal" data-reveal="left" aria-labelledby="aulas-p">
+            <div class="aulas-nivel__cab"><h3 id="aulas-p">Primaria</h3><span><i class="ph ph-sun" aria-hidden="true"></i> Turno mañana</span></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">1.° grado</span><a class="aula-link" data-seccion="A" href="aula.html?g=p1&amp;s=A" aria-label="1.° grado A, primaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=p1&amp;s=B" aria-label="1.° grado B, primaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=p1&amp;s=C" aria-label="1.° grado C, primaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=p1&amp;s=D" aria-label="1.° grado D, primaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">2.° grado</span><a class="aula-link" data-seccion="A" href="aula.html?g=p2&amp;s=A" aria-label="2.° grado A, primaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=p2&amp;s=B" aria-label="2.° grado B, primaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=p2&amp;s=C" aria-label="2.° grado C, primaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=p2&amp;s=D" aria-label="2.° grado D, primaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">3.° grado</span><a class="aula-link" data-seccion="A" href="aula.html?g=p3&amp;s=A" aria-label="3.° grado A, primaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=p3&amp;s=B" aria-label="3.° grado B, primaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=p3&amp;s=C" aria-label="3.° grado C, primaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=p3&amp;s=D" aria-label="3.° grado D, primaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">4.° grado</span><a class="aula-link" data-seccion="A" href="aula.html?g=p4&amp;s=A" aria-label="4.° grado A, primaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=p4&amp;s=B" aria-label="4.° grado B, primaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=p4&amp;s=C" aria-label="4.° grado C, primaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=p4&amp;s=D" aria-label="4.° grado D, primaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">5.° grado</span><a class="aula-link" data-seccion="A" href="aula.html?g=p5&amp;s=A" aria-label="5.° grado A, primaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=p5&amp;s=B" aria-label="5.° grado B, primaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=p5&amp;s=C" aria-label="5.° grado C, primaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=p5&amp;s=D" aria-label="5.° grado D, primaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">6.° grado</span><a class="aula-link" data-seccion="A" href="aula.html?g=p6&amp;s=A" aria-label="6.° grado A, primaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=p6&amp;s=B" aria-label="6.° grado B, primaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=p6&amp;s=C" aria-label="6.° grado C, primaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=p6&amp;s=D" aria-label="6.° grado D, primaria">D</a></div>
+          </article>
+          <article class="aulas-nivel reveal" data-reveal="right" aria-labelledby="aulas-s">
+            <div class="aulas-nivel__cab"><h3 id="aulas-s">Secundaria</h3><span><i class="ph ph-sun-horizon" aria-hidden="true"></i> Turno tarde</span></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">1.° año</span><a class="aula-link" data-seccion="A" href="aula.html?g=s1&amp;s=A" aria-label="1.° año A, secundaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=s1&amp;s=B" aria-label="1.° año B, secundaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=s1&amp;s=C" aria-label="1.° año C, secundaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=s1&amp;s=D" aria-label="1.° año D, secundaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">2.° año</span><a class="aula-link" data-seccion="A" href="aula.html?g=s2&amp;s=A" aria-label="2.° año A, secundaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=s2&amp;s=B" aria-label="2.° año B, secundaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=s2&amp;s=C" aria-label="2.° año C, secundaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=s2&amp;s=D" aria-label="2.° año D, secundaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">3.° año</span><a class="aula-link" data-seccion="A" href="aula.html?g=s3&amp;s=A" aria-label="3.° año A, secundaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=s3&amp;s=B" aria-label="3.° año B, secundaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=s3&amp;s=C" aria-label="3.° año C, secundaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=s3&amp;s=D" aria-label="3.° año D, secundaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">4.° año</span><a class="aula-link" data-seccion="A" href="aula.html?g=s4&amp;s=A" aria-label="4.° año A, secundaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=s4&amp;s=B" aria-label="4.° año B, secundaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=s4&amp;s=C" aria-label="4.° año C, secundaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=s4&amp;s=D" aria-label="4.° año D, secundaria">D</a></div>
+              <div class="aulas-fila"><span class="aulas-fila__grado">5.° año</span><a class="aula-link" data-seccion="A" href="aula.html?g=s5&amp;s=A" aria-label="5.° año A, secundaria">A</a><a class="aula-link" data-seccion="B" href="aula.html?g=s5&amp;s=B" aria-label="5.° año B, secundaria">B</a><a class="aula-link" data-seccion="C" href="aula.html?g=s5&amp;s=C" aria-label="5.° año C, secundaria">C</a><a class="aula-link" data-seccion="D" href="aula.html?g=s5&amp;s=D" aria-label="5.° año D, secundaria">D</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. VIDA ESCOLAR: NOTICIAS + FOTOS -->
+    <section class="section" id="vida">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Vida escolar</h2>
+          <p>Noticias del colegio y momentos del año.</p>
+        </header>
+        <div class="news">
+          <article class="post post--big card reveal" data-reveal="zoom">
+            <div class="post__img"><img width="1200" height="800" src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=1200&q=75" data-fallback="fya14-admision" alt="Mural en forma de lápiz con el mensaje Love to learn" loading="lazy"></div>
+            <div class="post__body">
+              <span class="tag">Admisión</span>
+              <h3>Resultados de Admisión 2026: <span data-adm-total>115</span> ingresantes a primer grado</h3>
+              <p>Ya puedes consultar la lista oficial de nuevos estudiantes de primaria, ordenada por apellido.</p>
+              <a href="#ingresantes" class="link">Buscar ingresante</a>
+            </div>
+          </article>
+          <article class="post card reveal" data-reveal="right">
+            <div class="post__img"><img width="700" height="467" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=75" data-fallback="fya14-censo" alt="Estudiantes conversando con sus laptops" loading="lazy"></div>
+            <div class="post__body">
+              <span class="tag">Institucional</span>
+              <h3>Censo Escolar 2025: 790 estudiantes en primaria</h3>
+              <a href="#niveles" class="link">Ver niveles</a>
+            </div>
+          </article>
+          <article class="post card reveal" data-reveal="right">
+            <div class="post__img"><img width="700" height="467" src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=700&q=75" data-fallback="fya14-web" alt="Pila de libros coloridos" loading="lazy"></div>
+            <div class="post__body">
+              <span class="tag">Comunidad</span>
+              <h3>Estrenamos sitio web renovado</h3>
+              <a href="https://www.facebook.com/I.E.FeyAlegria14" target="_blank" rel="noopener" class="link">Síguenos en Facebook <i class="ph ph-arrow-up-right" aria-hidden="true"></i><span class="sr-only"> (abre en otra pestaña)</span></a>
+            </div>
+          </article>
+        </div>
+        <div class="strip" id="photoStrip"></div>
+      </div>
+    </section>
+
+    <!-- 7. TRAYECTORIA HORIZONTAL -->
+    <section class="section" id="trayectoria">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Nuestra trayectoria</h2>
+          <p>Hitos del colegio y de la red Fe y Alegría, según registros públicos.</p>
+        </header>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- 8. ADMISIÓN -->
+    <section class="section admission" id="admision">
+      <div class="container">
+        <header class="section-head section-head--light reveal">
+          <h2>Admisión</h2>
+          <p>Todos los grados tienen <strong>secciones A, B, C y D</strong>. Elige un grado para empezar.</p>
+        </header>
+
+        <div class="vacantes">
+          <article class="nivel-vacante reveal" data-reveal="left">
+            <div class="nivel-vacante__cab">
+              <h3>Primaria</h3>
+              <span class="nivel-vacante__turno"><i class="ph ph-sun" aria-hidden="true"></i> Turno mañana</span>
+            </div>
+            <ul class="grados" id="gradosPrimaria" aria-label="Grados de primaria con vacantes"></ul>
+          </article>
+          <article class="nivel-vacante reveal" data-reveal="right">
+            <div class="nivel-vacante__cab">
+              <h3>Secundaria</h3>
+              <span class="nivel-vacante__turno"><i class="ph ph-sun-horizon" aria-hidden="true"></i> Turno tarde</span>
+            </div>
+            <ul class="grados" id="gradosSecundaria" aria-label="Grados de secundaria con vacantes"></ul>
+          </article>
+        </div>
+
+        <h3 class="admision__sub reveal">Cómo postular</h3>
+        <ol class="pasos-postular" id="steps"></ol>
+
+        <div class="admision__cierre">
+          <form class="form card reveal" data-reveal="left" id="admForm" novalidate>
+            <h3>Solicitud de información</h3>
+            <div class="form__row">
+              <div class="field">
+                <label for="aPadre">Nombre del apoderado</label>
+                <input id="aPadre" name="padre" required autocomplete="name" aria-describedby="aPadre-err">
+                <small class="error" id="aPadre-err" aria-live="polite"></small>
+              </div>
+              <div class="field">
+                <label for="aTel">Celular</label>
+                <input id="aTel" name="tel" type="tel" required inputmode="tel" autocomplete="tel" pattern="9[0-9]{8}" placeholder="Ej.: 987654321…" aria-describedby="aTel-help aTel-err">
+                <small class="help" id="aTel-help">9 dígitos, empieza con 9.</small>
+                <small class="error" id="aTel-err" aria-live="polite"></small>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label for="aAlumno">Nombre del estudiante</label>
+                <input id="aAlumno" name="alumno" required autocomplete="off" aria-describedby="aAlumno-err">
+                <small class="error" id="aAlumno-err" aria-live="polite"></small>
+              </div>
+              <div class="field">
+                <label for="aGrado">Grado al que postula</label>
+                <select id="aGrado" name="grado" required aria-describedby="aGrado-help aGrado-err"><option value="">Selecciona un grado</option></select>
+                <small class="help" id="aGrado-help">Cada grado tiene secciones A, B, C y D.</small>
+                <small class="error" id="aGrado-err" aria-live="polite"></small>
+              </div>
+            </div>
+            <div class="field">
+              <label for="aMsg">Consulta (opcional)</label>
+              <textarea id="aMsg" name="msg" rows="3" autocomplete="off"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block"><i class="ph ph-envelope-simple" aria-hidden="true"></i> Enviar por correo</button>
+            <div class="form__ok" id="admOk" hidden role="status">
+              <i class="ph ph-check-circle" aria-hidden="true"></i>
+              <div><strong>Correo preparado</strong><span>Se abrió tu aplicación de correo con los datos. Solo presiona enviar.</span></div>
+            </div>
+          </form>
+          <aside class="canales reveal" data-reveal="right" aria-labelledby="canales-titulo">
+            <h3 id="canales-titulo">¿Prefieres escribirnos?</h3>
+            <p>La convocatoria y los resultados también se publican en el Facebook del colegio.</p>
+            <a class="btn btn--facebook btn--block" href="https://www.facebook.com/I.E.FeyAlegria14" target="_blank" rel="noopener"><i class="ph ph-facebook-logo" aria-hidden="true"></i> Escríbenos en Facebook<span class="sr-only"> (abre en otra pestaña)</span></a>
+            <ul class="canales__lista">
+              <li><i class="ph ph-phone" aria-hidden="true"></i><a href="tel:+5143310090">(043) 310090</a></li>
+              <li><i class="ph ph-map-pin" aria-hidden="true"></i><span>Mz. F Lote 1, A.H. 3 de Octubre, Nuevo Chimbote</span></li>
+              <li><i class="ph ph-list-checks" aria-hidden="true"></i><a href="#ingresantes">Ver ingresantes 2026</a></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CONTACTO -->
+    <section class="section contact" id="contacto">
+      <div class="container contact__grid">
+        <div>
+          <header class="section-head reveal"><h2>Contacto</h2></header>
+          <ul class="contact__list">
+            <li class="feature reveal"><i class="ph ph-map-pin" aria-hidden="true"></i><div><strong>Dirección</strong><span>Av. Fe y Alegría, Mz. F Lote 1, A.H. 3 de Octubre, Nuevo Chimbote</span></div></li>
+            <li class="feature reveal"><i class="ph ph-phone" aria-hidden="true"></i><div><strong>Teléfono</strong><a href="tel:+5143310090">(043) 310090</a></div></li>
+            <li class="feature reveal"><i class="ph ph-envelope-simple" aria-hidden="true"></i><div><strong>Correo</strong><a href="mailto:sdsecundaria@feyalegria14.edu.pe">sdsecundaria@feyalegria14.edu.pe</a></div></li>
+            <li class="feature reveal"><i class="ph ph-facebook-logo" aria-hidden="true"></i><div><strong>Facebook</strong><a href="https://www.facebook.com/I.E.FeyAlegria14" target="_blank" rel="noopener">I.E. Fe y Alegría 14<span class="sr-only"> (abre en otra pestaña)</span></a></div></li>
+          </ul>
+          <div class="faq" id="faq"></div>
+        </div>
+        <div class="map reveal" data-reveal="right">
+          <iframe title="Mapa de ubicación de Fe y Alegría 14" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-78.5440%2C-9.1185%2C-78.5297%2C-9.1085&amp;layer=mapnik&amp;marker=-9.11353%2C-78.536861"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. PIE -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a href="#inicio" class="brand brand--footer"><img class="brand__logo" src="img/logo.png" alt="" width="40" height="50"><span class="brand__text" translate="no">Fe y Alegría 14<small>Nuevo Chimbote, Áncash</small></span></a>
+        <p>Movimiento de Educación Popular Integral y Promoción Social.</p>
+        <div class="social">
+          <a href="https://www.facebook.com/I.E.FeyAlegria14" target="_blank" rel="noopener" aria-label="Facebook (abre en otra pestaña)"><i class="ph ph-facebook-logo" aria-hidden="true"></i></a>
+          <a href="mailto:sdsecundaria@feyalegria14.edu.pe" aria-label="Correo"><i class="ph ph-envelope-simple" aria-hidden="true"></i></a>
+          <a href="tel:+5143310090" aria-label="Teléfono"><i class="ph ph-phone" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div><h3>Colegio</h3><a href="#nosotros">Nosotros</a><a href="#niveles">Niveles</a><a href="#aulas">Portal de aulas</a><a href="comunidad.html">El Patio (comunidad)</a><a href="#trayectoria">Trayectoria</a></div>
+      <div><h3>Familias</h3><a href="#ingresantes">Buscar ingresante</a><a href="#admision">Admisión</a><a href="#contacto">Contacto</a></div>
+      <div><h3>Turnos</h3><p>Primaria: mañana<br>Secundaria: tarde</p></div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© 2026 I.E. Fe y Alegría 14</span>
+      <span>Fotos referenciales. Datos públicos del MINEDU.</span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba"><i class="ph ph-arrow-up" aria-hidden="true"></i></button>
+
+  <script src="js/data-ingresantes.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/ingresantes.js"></script>
+  <script src="js/interactions.js"></script>
+</body>
+</html>

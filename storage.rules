@@ -1,0 +1,40 @@
+rules_version = '2';
+
+// Archivos de la Comunidad Fe y Alegría 14.
+// Cada persona sube solo a su carpeta publicaciones/{su correo}/.
+// Fotos: JPG, PNG, WEBP o GIF hasta 10 MB. Videos: MP4, WEBM o MOV hasta 50 MB.
+// fotos/{correo}.jpg: foto de perfil oficial. Solo la sube o borra la administración.
+service firebase.storage {
+  match /b/{bucket}/o {
+    function institucional() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower().matches('^[^@]+@feyalegria14[.]edu[.]pe$');
+    }
+
+    // Consulta Firestore: ¿esta cuenta está en admins/?
+    function esAdmin() {
+      return institucional() && firestore.exists(/databases/(default)/documents/admins/$(request.auth.token.email.lower()));
+    }
+
+    match /fotos/{archivo} {
+      allow read: if institucional();
+      allow write: if esAdmin()
+        && (request.resource == null || (request.resource.contentType.matches('image/(jpeg|png|webp)') && request.resource.size < 2 * 1024 * 1024));
+    }
+
+    match /publicaciones/{correo}/{archivo} {
+      allow read: if institucional();
+      allow create: if institucional()
+        && request.auth.token.email.lower() == correo
+        && ((request.resource.contentType.matches('image/(jpeg|png|webp|gif)') && request.resource.size < 10 * 1024 * 1024)
+          || (request.resource.contentType.matches('video/(mp4|webm|quicktime)') && request.resource.size < 50 * 1024 * 1024));
+      allow delete: if (institucional() && request.auth.token.email.lower() == correo) || esAdmin();
+      allow update: if false;
+    }
+
+    match /{todo=**} {
+      allow read, write: if false;
+    }
+  }
+}

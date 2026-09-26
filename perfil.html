@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi perfil | Fe y Alegría 14</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/aula.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("fya14-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="pagina-perfil is-cargando">
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="nav is-scrolled">
+    <div class="nav__inner container">
+      <a href="index.html" class="brand" aria-label="Fe y Alegría 14, inicio">
+        <img class="brand__logo" src="img/logo.png" alt="" width="40" height="50">
+        <span class="brand__text" translate="no">Fe y Alegría 14<small>Intranet del estudiante</small></span>
+      </a>
+      <nav class="nav__links" id="menu" aria-label="Mi perfil">
+        <a href="#hoy" style="--n:0">Hoy</a>
+        <a href="#notas" style="--n:1">Notas</a>
+        <a href="#asistencia" style="--n:2">Asistencia</a>
+        <a href="#justificaciones" style="--n:3">Justificaciones</a>
+        <a href="#horario" style="--n:4">Horario</a>
+        <a href="comunidad.html" style="--n:5">El Patio</a>
+        <a href="index.html" style="--n:6">Web del colegio</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro u oscuro"><i class="ph ph-moon" aria-hidden="true"></i></button>
+        <button class="btn btn--ghost btn--sm" id="btnSalir" type="button"><i class="ph ph-sign-out" aria-hidden="true"></i><span class="hide-sm">Cerrar sesión</span></button>
+        <button class="icon-btn burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="aviso-ejemplo container" id="avisoDemo" role="note" hidden>
+    <i class="ph ph-info" aria-hidden="true"></i>
+    <p><strong>Demostración.</strong> Estudiante, notas y asistencia ficticios. La intranet real muestra solo los datos de quien inicia sesión con su cuenta institucional.</p>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <!-- Cargando -->
+    <div class="container perfil-cargando" id="cargando" role="status">
+      <span class="giro" aria-hidden="true"></span> Cargando tu perfil…
+    </div>
+
+    <!-- Error o sin datos -->
+    <div class="container perfil-vacio" id="vacio" hidden>
+      <i class="ph ph-folder-simple-dashed" aria-hidden="true"></i>
+      <h1 id="vacioTitulo">Aún no hay datos para tu cuenta</h1>
+      <p id="vacioTexto"></p>
+      <div class="perfil-vacio__acciones">
+        <button class="btn btn--primary" type="button" data-salir>Cambiar de cuenta</button>
+        <a class="btn btn--ghost" href="index.html">Ir a la web del colegio</a>
+      </div>
+    </div>
+
+    <div id="perfil" hidden>
+      <!-- CABECERA + HOY -->
+      <section class="perfil-hero" id="hoy" aria-labelledby="perfilNombre">
+        <div class="container perfil-hero__grid">
+          <div class="perfil-quien">
+            <span class="perfil-avatar" id="avatar" aria-hidden="true"></span>
+            <div>
+              <p class="perfil-saludo" id="saludo">Hola</p>
+              <h1 id="perfilNombre"></h1>
+              <ul class="perfil-meta" id="perfilMeta"></ul>
+            </div>
+          </div>
+          <div class="hoy card" id="hoyCard">
+            <p class="hoy__fecha" id="hoyFecha"></p>
+            <div class="hoy__estado">
+              <span class="hoy__icono" id="hoyIcono" aria-hidden="true"></span>
+              <div><h2 id="hoyTitulo"></h2><p id="hoyTexto"></p></div>
+            </div>
+            <p class="hoy__clase" id="hoyClase"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESUMEN DE ASISTENCIA -->
+      <section class="container resumen" aria-label="Resumen de asistencia">
+        <div class="resumen__anillo reveal">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="anillo__fondo" cx="60" cy="60" r="52"/><circle class="anillo__valor" id="anilloValor" cx="60" cy="60" r="52" pathLength="100"/></svg>
+          <div><strong id="pctAsis">0%</strong><span>de asistencia</span></div>
+        </div>
+        <ul class="resumen__cifras" id="cifras"></ul>
+      </section>
+
+      <!-- NOTAS -->
+      <section class="section section--aula" id="notas" aria-labelledby="notasTitulo">
+        <div class="container">
+          <header class="section-head reveal">
+            <h2 id="notasTitulo">Mis notas</h2>
+            <p>Calificación por bimestre en cada área. Escala del Currículo Nacional.</p>
+          </header>
+          <ul class="leyenda-notas" aria-label="Escala">
+            <li><span class="nota nota--AD">AD</span>Logro destacado</li>
+            <li><span class="nota nota--A">A</span>Logro esperado</li>
+            <li><span class="nota nota--B">B</span>En proceso</li>
+            <li><span class="nota nota--C">C</span>En inicio</li>
+          </ul>
+          <div class="notas-wrap reveal">
+            <table class="notas" id="tablaNotas"></table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ASISTENCIA -->
+      <section class="section section--aula" id="asistencia" aria-labelledby="asisTitulo">
+        <div class="container">
+          <header class="section-head reveal">
+            <h2 id="asisTitulo">Mi asistencia</h2>
+            <p>Toca un día del calendario para ver su registro completo: hora de entrada, tardanza y justificación.</p>
+          </header>
+          <div class="asis-grid">
+            <div class="asis-col">
+              <div class="calendario card reveal">
+                <div class="calendario__cab">
+                  <button class="icon-btn" type="button" id="mesAnt" aria-label="Mes anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+                  <h3 id="mesTitulo" aria-live="polite"></h3>
+                  <button class="icon-btn" type="button" id="mesSig" aria-label="Mes siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+                </div>
+                <div class="calendario__dias" aria-hidden="true"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span></div>
+                <ol class="calendario__grid" id="calGrid"></ol>
+                <ul class="leyenda-asis">
+                  <li><span class="punto punto--P"></span>Asistió</li>
+                  <li><span class="punto punto--T"></span>Tardanza</li>
+                  <li><span class="punto punto--F"></span>Falta</li>
+                  <li><span class="punto punto--J"></span>Justificada</li>
+                </ul>
+              </div>
+              <article class="dia-detalle card" id="diaDetalle" aria-live="polite"></article>
+            </div>
+
+            <div class="historial reveal" data-reveal="right">
+              <div class="historial__cab">
+                <h3 class="bloque-titulo"><i class="ph ph-list-checks" aria-hidden="true"></i> Historial</h3>
+                <label class="sr-only" for="histMes">Mes</label>
+                <select id="histMes" class="hist-mes"></select>
+              </div>
+              <div class="filtro-inc" role="group" aria-label="Filtrar por estado" id="histFiltro">
+                <button type="button" aria-pressed="true" data-f="todo">Todo <span data-n="todo"></span></button>
+                <button type="button" aria-pressed="false" data-f="P">Asistencias <span data-n="P"></span></button>
+                <button type="button" aria-pressed="false" data-f="T">Tardanzas <span data-n="T"></span></button>
+                <button type="button" aria-pressed="false" data-f="F">Faltas <span data-n="F"></span></button>
+                <button type="button" aria-pressed="false" data-f="J">Justificadas <span data-n="J"></span></button>
+              </div>
+              <ul class="inc-lista" id="incLista"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JUSTIFICACIONES -->
+      <section class="section section--aula" id="justificaciones" aria-labelledby="justTitulo">
+        <div class="container">
+          <header class="section-head reveal">
+            <h2 id="justTitulo">Mis justificaciones</h2>
+            <p>Cada falta justificada o en trámite, con el motivo, la fecha en que se presentó y lo que respondió el colegio.</p>
+          </header>
+          <ul class="justs" id="justLista"></ul>
+        </div>
+      </section>
+
+      <!-- HORARIO -->
+      <section class="section section--aula horario-sec" id="horario" aria-labelledby="horarioTitulo">
+        <div class="container">
+          <header class="section-head reveal">
+            <h2 id="horarioTitulo">Mi horario</h2>
+            <p id="horarioSub"></p>
+          </header>
+          <div class="dias-tabs" role="tablist" aria-label="Día" id="diasTabs"></div>
+          <div class="horario-wrap reveal"><table class="horario" id="tablaHorario"></table></div>
+          <p class="horario-link"><a class="link" id="linkAula" href="#">Ver el portal de mi aula <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer footer--mini">
+    <div class="container footer__bottom">
+      <span>© 2026 I.E. Fe y Alegría 14. Intranet del estudiante.</span>
+      <span>¿Un dato está mal? Avisa a tu tutor.</span>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/sesion.js"></script>
+  <script src="js/data-aulas.js"></script>
+  <script src="js/calendario.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+</html>

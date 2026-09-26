@@ -1,0 +1,197 @@
+/* =========================================================
+   Portal del aula (aula.html) y selector de aulas en inicio.
+   Cada sección toma un color del escudo: A rojo, B azul, C sol, D carmelita.
+   ========================================================= */
+:root { --sec: var(--red-600); --sec-ink: #fffaf5; --sec-soft: var(--red-50); --sec-text: var(--red-700); }
+[data-seccion="B"] { --sec: var(--navy-800); --sec-ink: #fffaf5; --sec-soft: #e6eff6; --sec-text: var(--navy-800); }
+[data-seccion="C"] { --sec: var(--sun); --sec-ink: #1f1b19; --sec-soft: var(--sun-100); --sec-text: #8a5a06; }
+[data-seccion="D"] { --sec: #7a4a2a; --sec-ink: #fffaf5; --sec-soft: #f3e7dc; --sec-text: #6b3f22; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --sec-soft: #2a1d22; --sec-text: #ff9d95; }
+  :root:not([data-theme="light"])[data-seccion="B"], :root:not([data-theme="light"]) [data-seccion="B"] { --sec: #4f8fc0; --sec-ink: #0d1620; --sec-soft: #16283a; --sec-text: #9cc6ea; }
+  :root:not([data-theme="light"])[data-seccion="C"], :root:not([data-theme="light"]) [data-seccion="C"] { --sec-soft: #3b2d12; --sec-text: #ffd76a; }
+  :root:not([data-theme="light"])[data-seccion="D"], :root:not([data-theme="light"]) [data-seccion="D"] { --sec: #a86b43; --sec-soft: #2c2019; --sec-text: #e3b48f; }
+}
+:root[data-theme="dark"] { --sec-soft: #2a1d22; --sec-text: #ff9d95; }
+:root[data-theme="dark"][data-seccion="B"], :root[data-theme="dark"] [data-seccion="B"] { --sec: #4f8fc0; --sec-ink: #0d1620; --sec-soft: #16283a; --sec-text: #9cc6ea; }
+:root[data-theme="dark"][data-seccion="C"], :root[data-theme="dark"] [data-seccion="C"] { --sec-soft: #3b2d12; --sec-text: #ffd76a; }
+:root[data-theme="dark"][data-seccion="D"], :root[data-theme="dark"] [data-seccion="D"] { --sec: #a86b43; --sec-soft: #2c2019; --sec-text: #e3b48f; }
+
+/* ---------- Portada del aula ---------- */
+.aula-hero { position: relative; isolation: isolate; overflow: hidden; padding: clamp(32px, 6vw, 72px) 0 var(--s-8); color: #fffaf5; background: #1a1411; }
+.aula-hero__fondo { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; filter: saturate(.9); transform: scale(1.05); animation: fondoIn 1.6s var(--ease-out) both; }
+.aula-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgb(20 14 10 / .92) 30%, rgb(20 14 10 / .55) 70%, rgb(20 14 10 / .35)), linear-gradient(0deg, rgb(20 14 10 / .7), transparent 50%); }
+@keyframes fondoIn { from { opacity: 0; transform: scale(1.15); } }
+.aula-hero__grid { display: grid; grid-template-columns: 1fr minmax(280px, 380px); gap: clamp(24px, 5vw, 64px); align-items: end; }
+.aula-hero .load { animation-delay: calc(var(--d, 0) * 90ms); }
+
+.migas { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: .92rem; color: #e8d9c8; }
+.migas a { color: #fffaf5; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat; transition: background-size .3s var(--ease-out); }
+.migas a:hover { background-size: 100% 1.5px; }
+.migas i { font-size: .8rem; opacity: .7; }
+
+.aula-marca { display: flex; align-items: center; gap: clamp(10px, 2vw, 18px); margin-top: var(--s-6); }
+.aula-marca__grado { font-family: var(--font-display); font-weight: var(--w-black); font-size: clamp(4.5rem, 12vw, 8.5rem); line-height: .85; letter-spacing: -.04em; font-variation-settings: "wdth" 80; }
+.aula-marca__sec {
+  display: grid; place-items: center; width: clamp(72px, 11vw, 120px); aspect-ratio: 1; border-radius: 28%;
+  background: var(--sec); color: var(--sec-ink); font-family: var(--font-display); font-weight: var(--w-black); font-size: clamp(3rem, 7.5vw, 5.4rem); line-height: 1;
+  transform: rotate(-6deg); animation: secIn .9s .5s var(--ease-out) both;
+}
+@keyframes secIn { from { transform: rotate(-30deg) scale(.4); opacity: 0; } }
+.aula-hero h1 { margin-top: var(--s-4); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 700; font-variation-settings: "wdth" 92; }
+.aula-hero__lema { margin-top: var(--s-2); font-size: var(--fs-lead); color: #f3e4d2; font-style: italic; }
+.aula-datos { list-style: none; margin: var(--s-6) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.aula-datos li { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: var(--r-pill); background: rgb(255 250 245 / .12); border: 1px solid rgb(255 250 245 / .18); font-weight: 700; font-size: .92rem; }
+.aula-datos i { color: var(--sun); font-size: 1.1rem; }
+
+.tutor { display: flex; gap: var(--s-4); align-items: flex-start; padding: var(--s-6); border-radius: var(--r-lg); background: rgb(255 250 245 / .1); border: 1px solid rgb(255 250 245 / .2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.tutor__avatar { flex-shrink: 0; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #fffaf5; color: #1f1b19; font-family: var(--font-display); font-weight: var(--w-black); font-size: 1.5rem; box-shadow: 0 0 0 4px var(--sec); }
+.tutor__rol { font-size: .88rem; font-weight: 700; color: var(--sun); }
+.tutor__nombre { margin-top: 2px; font-size: 1.35rem; font-weight: 700; color: #fffaf5; }
+.tutor__nota { margin-top: var(--s-2); font-size: .92rem; color: #e8d9c8; line-height: 1.45; }
+
+/* Cambiar de aula */
+.cambio { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4); margin-top: clamp(32px, 5vw, 56px); padding-top: var(--s-6); border-top: 1px solid rgb(255 250 245 / .16); }
+.cambio__secs { display: flex; gap: 8px; }
+.sec-chip { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; border: 1.5px solid rgb(255 250 245 / .3); color: #fffaf5; text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; transition: transform var(--t-hover) var(--ease-out), background-color var(--t-hover) ease; }
+a.sec-chip:hover { transform: translateY(-3px); background: rgb(255 250 245 / .14); }
+a.sec-chip:active { transform: scale(.95); }
+.sec-chip.is-actual { background: var(--sec); color: var(--sec-ink); border-color: transparent; }
+.cambio__grados { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.cambio__flecha { background: rgb(255 250 245 / .1); border-color: rgb(255 250 245 / .25); color: #fffaf5; text-decoration: none; }
+.cambio__flecha[aria-disabled="true"] { opacity: .35; pointer-events: none; }
+.cambio__select { min-height: 44px; max-width: 100%; padding: 8px 14px; border-radius: var(--r-pill); border: 1.5px solid rgb(255 250 245 / .3); background: rgb(20 14 10 / .5); color: #fffaf5; font-weight: 700; cursor: pointer; }
+.cambio__select option, .cambio__select optgroup { color: #1f1b19; background: #fffdfa; }
+
+/* Aviso de contenido de ejemplo */
+.aviso-ejemplo { display: flex; gap: var(--s-3); align-items: flex-start; margin-top: var(--s-6); padding: 14px 18px; border-radius: var(--r); background: var(--sun-100); color: var(--ink); font-size: .95rem; }
+.aviso-ejemplo i { font-size: 1.3rem; color: var(--sun-600); margin-top: 1px; }
+
+.section--aula { padding-block: clamp(48px, 7vw, 80px); }
+.section--aula + .section--aula { padding-top: 0; }
+.bloque-titulo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: var(--w-black); margin-bottom: var(--s-4); }
+.bloque-titulo i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sec-soft); color: var(--sec-text); font-size: 1.3rem; }
+
+/* ---------- Esta semana ---------- */
+.semana { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+.semana .section-head { margin-bottom: var(--s-6); }
+.tareas { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.tarea { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-4); align-items: center; padding: 16px 18px; }
+.tarea__icono { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--sec-soft); color: var(--sec-text); font-size: 1.5rem; transition: transform .45s var(--ease-out); }
+.tarea:hover .tarea__icono { transform: rotate(-10deg) scale(1.08); }
+.tarea__area { font-size: .85rem; font-weight: 700; color: var(--muted); }
+.tarea h3 { margin-top: 2px; font-family: var(--font-body); font-size: 1.08rem; font-weight: 700; line-height: 1.3; }
+.tarea__fecha { margin-top: 4px; font-size: .88rem; color: var(--muted); }
+.tarea__fecha time::first-letter { text-transform: uppercase; }
+.tarea__lado { display: grid; justify-items: end; gap: 6px; text-align: right; }
+.tarea__lado b { font-family: var(--font-display); font-size: 1.05rem; white-space: nowrap; }
+.tarea .tag { background: var(--surface-2); color: var(--muted); }
+.tarea--eval { border-color: color-mix(in srgb, var(--sec) 55%, var(--line)); }
+.tarea--eval .tag { background: var(--sec); color: var(--sec-ink); }
+
+.semana__avisos { padding: var(--s-6); border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); }
+.avisos { list-style: none; margin: 0; padding: 0; }
+.aviso { display: flex; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+.aviso > i { flex-shrink: 0; font-size: 1.4rem; color: var(--sec-text); margin-top: 2px; }
+.aviso h4 { font-family: var(--font-body); font-size: 1.02rem; font-weight: 700; }
+.aviso p { margin-top: 2px; font-size: .93rem; color: var(--muted); line-height: 1.45; }
+.aviso time { display: block; margin-top: 6px; font-size: .82rem; font-weight: 700; color: var(--muted); }
+
+/* ---------- Horario ---------- */
+.horario-sec .section-head { margin-bottom: var(--s-6); }
+.horario-wrap { border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
+.horario { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: .93rem; }
+.horario th, .horario td { padding: 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.horario thead th { padding: 14px 10px; font-family: var(--font-display); font-size: 1.05rem; background: var(--surface-2); }
+.horario thead th small { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: var(--r-pill); background: var(--sec); color: var(--sec-ink); font-family: var(--font-body); font-size: .72rem; vertical-align: 2px; }
+.horario thead th:first-child { width: 86px; }
+.horario tbody th { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; }
+.horario tbody th span { display: block; font-weight: 400; font-size: .8rem; color: var(--muted); }
+.horario tbody tr:last-child > * { border-bottom: 0; }
+.horario .is-hoy { background: color-mix(in srgb, var(--sec-soft) 70%, transparent); }
+.clase { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px; font-weight: 500; line-height: 1.25; transition: background-color var(--t-hover) ease, transform var(--t-hover) var(--ease-out); }
+.clase i { flex-shrink: 0; font-size: 1.15rem; color: var(--sec-text); }
+td.is-par .clase { background: var(--sec); color: var(--sec-ink); transform: scale(1.03); }
+td.is-par .clase i { color: inherit; }
+.horario__recreo th, .horario__recreo td { padding-block: 6px; background: var(--surface-2); color: var(--muted); font-weight: 700; font-size: .85rem; }
+.horario__recreo td { text-align: center; }
+.horario tr.is-ahora th { color: var(--sec-text); }
+.horario tr.is-ahora td.is-hoy .clase { box-shadow: inset 0 0 0 2px var(--sec); }
+.dias-tabs { display: none; }
+
+/* ---------- Proyecto + docentes ---------- */
+.proyecto-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
+.proyecto { overflow: hidden; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); }
+.proyecto__foto { overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface-2); }
+.proyecto__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
+.proyecto:hover .proyecto__foto img { transform: scale(1.05); }
+.proyecto__cuerpo { padding: clamp(20px, 3vw, 32px); }
+.proyecto .tag { background: var(--sec-soft); color: var(--sec-text); }
+.proyecto h2 { margin-top: var(--s-3); font-size: var(--fs-h3); font-weight: var(--w-black); }
+.proyecto__cuerpo > p:not(.tag) { margin-top: var(--s-2); color: var(--muted); }
+.avance { margin-top: var(--s-6); }
+.avance__cab { display: flex; justify-content: space-between; font-size: .9rem; font-weight: 700; }
+.avance__cab b { font-family: var(--font-display); font-size: 1.1rem; }
+.avance__barra { margin-top: 8px; height: 10px; border-radius: 10px; background: var(--surface-2); overflow: hidden; }
+.avance__barra span { display: block; height: 100%; border-radius: inherit; background: var(--sec); transform-origin: left; transform: scaleX(0); transition: transform 1.4s .2s var(--ease-out); }
+.avance.is-in .avance__barra span { transform: scaleX(var(--avance, 0)); }
+html:not(.js) .avance__barra span { transform: scaleX(var(--avance, 0)); }
+
+.areas { list-style: none; margin: 0; padding: 0; }
+.area { position: relative; isolation: isolate; display: flex; align-items: center; gap: 14px; padding: 11px 8px; border-bottom: 1px solid var(--line); }
+.area::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: var(--r-sm); background: var(--sec-soft); opacity: 0; transform: scaleX(.97); transition: opacity var(--t-hover) ease, transform var(--t-hover) var(--ease-out); }
+.area:hover::before { opacity: 1; transform: none; }
+.area > i { flex-shrink: 0; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--surface-2); color: var(--sec-text); font-size: 1.25rem; }
+.area strong { display: block; font-weight: 700; line-height: 1.25; }
+.area span { font-size: .9rem; color: var(--muted); }
+.area__horas { margin-left: auto; flex-shrink: 0; font-family: var(--font-display); font-size: 1rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- Selector de aulas en inicio ---------- */
+.aulas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.aulas-nivel { padding: clamp(20px, 3vw, 32px); border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); }
+.aulas-nivel__cab { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-2); margin-bottom: var(--s-4); }
+.aulas-nivel__cab h3 { font-size: var(--fs-h3); font-weight: var(--w-black); }
+.aulas-nivel__cab span { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .9rem; color: var(--muted); }
+.aulas-fila { display: grid; grid-template-columns: minmax(90px, 1fr) repeat(4, 52px); align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+.aulas-fila__grado { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
+.aula-link {
+  display: grid; place-items: center; height: 52px; border-radius: 14px; text-decoration: none;
+  font-family: var(--font-display); font-weight: var(--w-black); font-size: 1.25rem;
+  background: var(--sec-soft); color: var(--sec-text);
+  transition: transform var(--t-hover) var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.aula-link:hover { transform: translateY(-3px) rotate(-3deg); background: var(--sec); color: var(--sec-ink); }
+.aula-link:active { transform: scale(.94); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 960px) {
+  .aula-hero__grid, .semana, .proyecto-grid, .aulas-grid { grid-template-columns: 1fr; }
+  .tutor { max-width: 520px; }
+}
+@media (max-width: 720px) {
+  .dias-tabs { display: flex; gap: 6px; margin-bottom: var(--s-3); overflow-x: auto; }
+  .dias-tabs button { flex: 1; min-height: 44px; padding: 8px 10px; border-radius: var(--r-pill); border: 1.5px solid var(--line); background: var(--surface); font-weight: 700; cursor: pointer; transition: background-color var(--t-hover) ease, transform var(--t-press) var(--ease-out); }
+  .dias-tabs button:active { transform: scale(.96); }
+  .dias-tabs button[aria-selected="true"] { background: var(--sec); color: var(--sec-ink); border-color: transparent; }
+  .horario { table-layout: auto; }
+  .horario thead { display: none; }
+  .horario tbody th { width: 76px; }
+  .horario td[data-dia] { display: none; }
+  .horario[data-dia="0"] td[data-dia="0"], .horario[data-dia="1"] td[data-dia="1"], .horario[data-dia="2"] td[data-dia="2"],
+  .horario[data-dia="3"] td[data-dia="3"], .horario[data-dia="4"] td[data-dia="4"] { display: table-cell; }
+  .horario .is-hoy { background: none; }
+  .tarea { grid-template-columns: auto 1fr; }
+  .tarea__lado { grid-column: 2; justify-items: start; grid-auto-flow: column; justify-content: start; align-items: center; gap: 10px; text-align: left; }
+  .cambio { justify-content: flex-start; }
+  .aulas-fila { grid-template-columns: 1fr repeat(4, 48px); gap: 6px; }
+  .aula-link { height: 48px; }
+}
+@media (max-width: 380px) { .aulas-fila { grid-template-columns: 1fr repeat(4, 44px); } .aula-link { height: 44px; } }
+
+@media (hover: none) { a.sec-chip:hover, .aula-link:hover { transform: none; } .proyecto:hover .proyecto__foto img { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .aula-hero__fondo, .aula-marca__sec { animation: none; }
+  .aula-marca__sec { transform: rotate(-6deg); }
+  .avance__barra span { transition: none; }
+  a.sec-chip:hover, .aula-link:hover, td.is-par .clase { transform: none; }
+}

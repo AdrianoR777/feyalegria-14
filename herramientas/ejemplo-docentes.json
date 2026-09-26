@@ -1,0 +1,23 @@
+[
+  {
+    "correo": "nombre.tutor@feyalegria14.edu.pe",
+    "nombres": "Nombre",
+    "apellidos": "Apellido Apellido",
+    "tutorDe": ["s3B"],
+    "areas": {
+      "s3B": ["Matemática", "Tutoría"],
+      "s3A": ["Matemática"],
+      "s4A": ["Matemática"]
+    }
+  },
+  {
+    "correo": "nombre.ingles@feyalegria14.edu.pe",
+    "nombres": "Nombre",
+    "apellidos": "Apellido Apellido",
+    "tutorDe": [],
+    "areas": {
+      "s3B": ["Inglés"],
+      "s3A": ["Inglés"]
+    }
+  }
+]

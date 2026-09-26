@@ -1,0 +1,154 @@
+rules_version = '2';
+
+// Intranet Fe y Alegría 14.
+//
+// estudiantes/{correo}: cada estudiante lee SOLO su documento.
+//   Un docente lee los estudiantes de sus aulas y puede cambiar solo:
+//   - asistencia y justificaciones, si es tutor de esa aula;
+//   - notas de las áreas que dicta en esa aula.
+// docentes/{correo}: cada docente lee solo su documento.
+// admins/{correo}: cuentas de administración. Pueden ver y cambiar todo desde admin.html.
+//   La primera cuenta se carga con: node herramientas/importar.mjs herramientas/admins.json --admins
+// fichas/{correo}: datos personales sensibles (DNI, apoderado, teléfono). Solo administración.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function correo() { return request.auth.token.email.lower(); }
+    function institucional() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && correo().matches('^[^@]+@feyalegria14[.]edu[.]pe$');
+    }
+    function rutaDocente() { return /databases/$(database)/documents/docentes/$(correo()); }
+    function esDocente() { return institucional() && exists(rutaDocente()); }
+    function docente() { return get(rutaDocente()).data; }
+    function esTutorDe(aula) { return aula in docente().tutorDe; }
+    function dictaEn(aula) { return aula in docente().areas; }
+    function esAdmin() { return institucional() && exists(/databases/$(database)/documents/admins/$(correo())); }
+    function cambio(campo) { return request.resource.data.diff(resource.data).affectedKeys().hasAny([campo]); }
+
+    match /estudiantes/{id} {
+      allow get: if institucional() && correo() == id;
+      allow read: if esDocente() && (esTutorDe(resource.data.aula) || dictaEn(resource.data.aula));
+
+      allow update: if esDocente()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["asistencia", "notas", "actualizado", "actualizadoPor"])
+        && request.resource.data.actualizadoPor == correo()
+        && (!cambio("asistencia") || (esTutorDe(resource.data.aula) && request.resource.data.asistencia is map))
+        && (!cambio("notas") || (dictaEn(resource.data.aula)
+              && request.resource.data.notas is map
+              && request.resource.data.notas.diff(resource.data.notas).affectedKeys().hasOnly(docente().areas[resource.data.aula])));
+      // Administración: todo
+      allow read, write: if esAdmin();
+    }
+
+    match /docentes/{id} {
+      allow get: if institucional() && correo() == id;
+      allow read, write: if esAdmin();
+    }
+
+    match /fichas/{id} {
+      allow read, write: if esAdmin();
+    }
+
+    match /admins/{id} {
+      allow get: if institucional() && correo() == id;
+      allow read, write: if esAdmin();
+    }
+
+    // ================= Comunidad =================
+    // usuarios/{correo}: ficha pública (nombre, rol, aula, etiqueta). Solo la escribe importar.mjs,
+    // así nadie puede cambiarse de grado o hacerse pasar por docente.
+    function rutaUsuario() { return /databases/$(database)/documents/usuarios/$(correo()); }
+    function usuario() { return get(rutaUsuario()).data; }
+    function esMiembro() { return institucional() && exists(rutaUsuario()); }
+    // El autor que se guarda en la publicación tiene que coincidir con su ficha oficial
+    function autorValido(d) {
+      return d.autor == correo() && d.nombre == usuario().nombre && d.rol == usuario().rol
+        && d.aula == usuario().aula && d.etiqueta == usuario().etiqueta;
+    }
+    // Archivos: solo los que el propio autor subió a su carpeta de Storage
+    function archivoValido(m) {
+      return m.keys().hasOnly(["tipo", "path", "url", "w", "h"])
+        && m.tipo in ["imagen", "video"]
+        && m.path.split("/")[0] == "publicaciones" && m.path.split("/")[1] == correo()
+        && (m.url.matches("^https://firebasestorage[.]googleapis[.]com/.*") || m.url.matches("^http://(127[.]0[.]0[.]1|localhost):9199/.*"));
+    }
+    function mediaValida(l) {
+      return l is list && l.size() <= 4
+        && (l.size() < 1 || archivoValido(l[0])) && (l.size() < 2 || archivoValido(l[1]))
+        && (l.size() < 3 || archivoValido(l[2])) && (l.size() < 4 || archivoValido(l[3]));
+    }
+    function encuestaValida(e) {
+      return e == null || (e.keys().hasOnly(["pregunta", "opciones"]) && e.opciones is list
+        && e.opciones.size() >= 2 && e.opciones.size() <= 4 && e.pregunta is string && e.pregunta.size() <= 200);
+    }
+    function soloCambia(campos) { return request.resource.data.diff(resource.data).affectedKeys().hasOnly(campos); }
+
+    match /usuarios/{id} {
+      allow read: if esMiembro() || esAdmin();
+      allow write: if esAdmin();
+    }
+    function esModerador() { return esDocente() || esAdmin(); }
+
+    match /publicaciones/{pid} {
+      allow read: if (esMiembro() && (resource.data.oculto == false || resource.data.autor == correo())) || esModerador();
+
+      allow create: if esMiembro()
+        && request.resource.data.keys().hasOnly(["autor", "nombre", "rol", "aula", "etiqueta", "texto", "media", "encuesta", "likes", "votos", "oculto", "creado"])
+        && autorValido(request.resource.data)
+        && request.resource.data.texto is string && request.resource.data.texto.size() <= 2000
+        && mediaValida(request.resource.data.media)
+        && encuestaValida(request.resource.data.encuesta)
+        && (request.resource.data.texto.size() > 0 || request.resource.data.media.size() > 0 || request.resource.data.encuesta != null)
+        && request.resource.data.likes == {} && request.resource.data.votos == {}
+        && request.resource.data.oculto == false
+        && request.resource.data.creado == request.time;
+
+      // Me gusta: cada quien solo agrega o quita el suyo
+      allow update: if esMiembro() && resource.data.oculto == false && soloCambia(["likes"])
+        && request.resource.data.likes.diff(resource.data.likes).affectedKeys().hasOnly([correo()])
+        && (!(correo() in request.resource.data.likes) || request.resource.data.likes[correo()] == true);
+      // Encuesta: cada quien solo pone o cambia su voto
+      allow update: if esMiembro() && resource.data.oculto == false && resource.data.encuesta != null && soloCambia(["votos"])
+        && request.resource.data.votos.diff(resource.data.votos).affectedKeys().hasOnly([correo()])
+        && request.resource.data.votos[correo()] is int
+        && request.resource.data.votos[correo()] >= 0
+        && request.resource.data.votos[correo()] < resource.data.encuesta.opciones.size();
+      // Moderación: un docente oculta o vuelve a mostrar
+      allow update: if esModerador() && soloCambia(["oculto", "ocultoPor"])
+        && request.resource.data.oculto is bool && request.resource.data.ocultoPor == correo();
+      // El autor borra lo suyo
+      allow delete: if (esMiembro() && resource.data.autor == correo()) || esAdmin();
+
+      match /comentarios/{cid} {
+        function pub() { return get(/databases/$(database)/documents/publicaciones/$(pid)).data; }
+        allow read: if (esMiembro() && (pub().oculto == false || pub().autor == correo())) || esModerador();
+        allow create: if esMiembro() && pub().oculto == false
+          && request.resource.data.keys().hasOnly(["autor", "nombre", "rol", "aula", "etiqueta", "texto", "creado"])
+          && autorValido(request.resource.data)
+          && request.resource.data.texto is string && request.resource.data.texto.size() > 0 && request.resource.data.texto.size() <= 500
+          && request.resource.data.creado == request.time;
+        // Borra quien comentó, un docente, o el autor de la publicación (al eliminarla se van sus comentarios)
+        allow delete: if (esMiembro() && (resource.data.autor == correo() || pub().autor == correo())) || esModerador();
+        allow update: if false;
+      }
+    }
+
+    // Reportes: cualquiera reporta; solo los docentes los leen y los cierran
+    match /reportes/{rid} {
+      allow create: if esMiembro()
+        && request.resource.data.keys().hasOnly(["pub", "motivo", "por", "creado"])
+        && request.resource.data.por == correo()
+        && request.resource.data.motivo is string && request.resource.data.motivo.size() <= 300
+        && request.resource.data.creado == request.time;
+      allow read, delete: if esModerador();
+      allow update: if false;
+    }
+
+    // Todo lo demás está cerrado
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

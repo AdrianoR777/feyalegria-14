@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intranet | Fe y Alegría 14</title>
+  <meta name="description" content="Ingreso de estudiantes de la I.E. Fe y Alegría 14 con su cuenta institucional.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/aula.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("fya14-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="pagina-login">
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <main id="main" class="login" tabindex="-1">
+    <div class="login__foto" aria-hidden="true">
+      <img src="img/colegio-3.jpg" width="596" height="335" alt="">
+      <p class="login__cita">Notas, horario y asistencia, en un solo lugar.</p>
+    </div>
+
+    <div class="login__panel">
+      <div class="login__top">
+        <a href="index.html" class="brand" aria-label="Fe y Alegría 14, volver al inicio">
+          <img class="brand__logo" src="img/logo.png" alt="" width="40" height="50">
+          <span class="brand__text" translate="no">Fe y Alegría 14<small>Nuevo Chimbote</small></span>
+        </a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro u oscuro"><i class="ph ph-moon" aria-hidden="true"></i></button>
+      </div>
+
+      <section class="login__card load" style="--d:0" aria-labelledby="loginTitulo">
+        <h1 id="loginTitulo">Intranet del colegio</h1>
+        <p class="login__sub">Estudiantes y docentes: ingresa con tu cuenta institucional <strong>@<span data-dominio>feyalegria14.edu.pe</span></strong> y su contraseña.</p>
+
+        <button type="button" class="btn-google" id="btnGoogle">
+          <svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+          <span>Continuar con Google</span>
+        </button>
+
+        <p class="login__estado" id="loginEstado" role="status" aria-live="polite"></p>
+
+        <div class="login__sin-conectar" id="sinConectar" hidden>
+          <i class="ph ph-plug" aria-hidden="true"></i>
+          <div>
+            <strong>Intranet sin conectar</strong>
+            <p>El colegio aún no enlazó la intranet con su cuenta de Google. Mientras tanto puedes ver una demostración con datos ficticios.</p>
+            <span class="login__demos"><a class="link" href="perfil.html?demo">Demo estudiante <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a><a class="link" href="docente.html?demo">Demo docente <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a><a class="link" href="comunidad.html?demo">Demo El Patio <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></span>
+          </div>
+        </div>
+
+        <ul class="login__ayuda">
+          <li><i class="ph ph-key" aria-hidden="true"></i><span>¿Olvidaste tu contraseña? Pide que la restablezcan a tu tutor o en secretaría.</span></li>
+          <li><i class="ph ph-shield-check" aria-hidden="true"></i><span>La contraseña la escribes en la página de Google, no en esta web.</span></li>
+          <li><i class="ph ph-users" aria-hidden="true"></i><span>Cuentas personales (@gmail.com) no tienen acceso.</span></li>
+        </ul>
+      </section>
+
+      <a class="login__volver link" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Volver a la web del colegio</a>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/sesion.js"></script>
+  <script>
+    (function () {
+      const S = window.SESION, btn = document.getElementById("btnGoogle"), estado = document.getElementById("loginEstado");
+      document.querySelectorAll("[data-dominio]").forEach((el) => { el.textContent = S.DOMINIO; });
+      const aviso = (txt, tipo) => { estado.textContent = txt; estado.dataset.tipo = tipo || ""; };
+      if (!S.conectada) {
+        btn.disabled = true;
+        document.getElementById("sinConectar").hidden = false;
+        return;
+      }
+      // Si ya hay sesión, pasa directo al perfil
+      S.alCambiar(async (u) => { if (u) location.replace(await S.destino(u)); });
+      const MENSAJES = {
+        "fya/dominio": "Esa cuenta no es institucional. Usa tu correo @" + S.DOMINIO + ".",
+        "auth/popup-closed-by-user": "Cerraste la ventana de Google antes de terminar.",
+        "auth/cancelled-popup-request": "",
+        "auth/popup-blocked": "Tu navegador bloqueó la ventana de Google. Permite ventanas emergentes e inténtalo otra vez.",
+        "auth/network-request-failed": "Sin conexión a internet. Revisa tu red e inténtalo otra vez.",
+        "auth/unauthorized-domain": "Esta dirección web no está autorizada en Firebase. Avisa al administrador.",
+      };
+      btn.addEventListener("click", async () => {
+        btn.disabled = true; btn.classList.add("is-cargando");
+        aviso("Abriendo la ventana de Google…");
+        try {
+          const u = await S.entrar();
+          aviso("Listo. Entrando…", "ok");
+          location.replace(await S.destino(u));
+        } catch (e) {
+          aviso(e.code in MENSAJES ? MENSAJES[e.code] : "No se pudo iniciar sesión. Inténtalo otra vez.", "error");
+          btn.disabled = false; btn.classList.remove("is-cargando");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

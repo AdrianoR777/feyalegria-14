@@ -1,0 +1,33 @@
+[
+  {
+    "correo": "nombre.apellido@feyalegria14.edu.pe",
+    "nombres": "Nombre Segundo",
+    "apellidos": "Apellido Apellido",
+    "codigo": "2026-S3B-001",
+    "nivel": "s",
+    "grado": 3,
+    "seccion": "B",
+    "notas": {
+      "Matemática": ["A", "AD", "", ""],
+      "Comunicación": ["B", "A", "", ""],
+      "Ciencia y Tecnología": ["A", "A", "", ""],
+      "Ciencias Sociales": ["A", "B", "", ""],
+      "Desarrollo Personal, Ciudadanía y Cívica": ["AD", "A", "", ""],
+      "Educación para el Trabajo": ["A", "A", "", ""],
+      "Inglés": ["B", "A", "", ""],
+      "Arte y Cultura": ["A", "AD", "", ""],
+      "Educación Física": ["A", "A", "", ""],
+      "Educación Religiosa": ["A", "A", "", ""],
+      "Tutoría": ["A", "A", "", ""]
+    },
+    "asistencia": {
+      "2026-09-21": { "e": "P", "h": "12:48" },
+      "2026-09-22": { "e": "T", "h": "13:09" },
+      "2026-09-16": { "e": "F" },
+      "2026-09-17": { "e": "J", "j": { "motivo": "Cita médica", "presentada": "2026-09-18", "por": "Madre de familia", "estado": "aprobada", "obs": "Revisada por tutoría." } },
+      "2026-09-23": { "e": "F", "j": { "motivo": "Enfermedad", "presentada": "2026-09-24", "por": "Padre de familia", "estado": "pendiente" } },
+      "2026-09-24": { "e": "F", "j": { "motivo": "Viaje familiar", "presentada": "2026-09-25", "por": "Apoderado", "estado": "observada", "obs": "Falta adjuntar la constancia." } },
+      "2026-09-25": { "e": "P", "h": "12:51" }
+    }
+  }
+]

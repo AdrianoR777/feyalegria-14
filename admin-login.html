@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acceso administrativo | Fe y Alegría 14</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1a1411">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <style>
+    /* Acceso aparte de la intranet: fondo oscuro fijo, una sola tarjeta */
+    .adm-acceso { min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px; background: #1a1411; color: #fdefcf; }
+    .adm-acceso__card { width: min(440px, 100%); display: grid; gap: 18px; padding: clamp(24px, 5vw, 40px); border-radius: 24px; background: #241c17; border: 1px solid rgb(253 239 207 / .12); box-shadow: 0 30px 60px -30px rgb(0 0 0 / .8); animation: fadeUp .4s var(--ease-out) both; }
+    .adm-acceso__marca { display: flex; align-items: center; gap: 12px; }
+    .adm-acceso__marca img { width: 38px; }
+    .adm-acceso__marca span { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+    .adm-acceso__marca small { display: block; font-family: var(--font-body); font-weight: 400; font-size: .8rem; color: #c9b39c; }
+    .adm-acceso__escudo { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: var(--sun); color: #1f1b19; font-size: 2rem; }
+    .adm-acceso h1 { font-size: clamp(1.8rem, 5vw, 2.3rem); font-weight: var(--w-black); font-variation-settings: "wdth" 88; color: #fffaf5; }
+    .adm-acceso p { color: #d9ccb8; line-height: 1.5; }
+    .adm-acceso .btn-google { margin-top: 4px; background: #fffaf5; color: #1f1b19; border-color: transparent; }
+    .adm-acceso .btn-google:hover:not(:disabled) { border-color: var(--sun); }
+    .adm-acceso__estado { min-height: 1.4em; font-weight: 700; font-size: .95rem; color: #d9ccb8; }
+    .adm-acceso__estado[data-tipo="error"] { color: #ff9d8f; }
+    .adm-acceso__estado[data-tipo="ok"] { color: #6fd3a0; }
+    .adm-acceso__sesion { display: grid; gap: 10px; padding: 14px 16px; border-radius: 14px; background: rgb(255 157 143 / .1); border: 1px solid rgb(255 157 143 / .3); }
+    .adm-acceso__sesion button { justify-self: start; }
+    .adm-acceso__demo { padding: 14px 16px; border-radius: 14px; background: rgb(245 176 36 / .12); font-size: .92rem; }
+    .adm-acceso__demo a { color: var(--sun); font-weight: 700; }
+    .adm-acceso__pie { display: flex; align-items: flex-start; gap: 8px; padding-top: 14px; border-top: 1px solid rgb(253 239 207 / .12); font-size: .85rem; color: #c9b39c; }
+    .adm-acceso__pie i { margin-top: 2px; color: var(--sun); }
+    .adm-acceso .btn--ghost { color: #fdefcf; border-color: rgb(253 239 207 / .3); }
+    .adm-acceso :focus-visible { outline-color: #ffd76a; }
+    @media (prefers-reduced-motion: reduce) { .adm-acceso__card { animation: none; } }
+  </style>
+</head>
+<body>
+  <main class="adm-acceso">
+    <section class="adm-acceso__card" aria-labelledby="titulo">
+      <div class="adm-acceso__marca">
+        <img src="img/logo.png" alt="" width="38" height="48">
+        <span translate="no">Fe y Alegría 14<small>Nuevo Chimbote</small></span>
+      </div>
+      <span class="adm-acceso__escudo" aria-hidden="true"><i class="ph ph-shield-check"></i></span>
+      <div>
+        <h1 id="titulo">Acceso administrativo</h1>
+        <p>Solo para cuentas autorizadas por la dirección. Ingresa con tu cuenta institucional <strong>@<span data-dominio>feyalegria14.edu.pe</span></strong>.</p>
+      </div>
+
+      <button type="button" class="btn-google" id="btnGoogle">
+        <svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+        <span>Ingresar con Google</span>
+      </button>
+      <p class="adm-acceso__estado" id="estado" role="status" aria-live="polite"></p>
+
+      <div class="adm-acceso__sesion" id="sinPermiso" hidden>
+        <p id="sinPermisoTxt"></p>
+        <button type="button" class="btn btn--ghost btn--sm" id="cambiar"><i class="ph ph-arrows-left-right" aria-hidden="true"></i>Usar otra cuenta</button>
+      </div>
+
+      <div class="adm-acceso__demo" id="sinConectar" hidden>
+        <p>El sistema aún no está conectado a Firebase. Puedes revisar el panel con datos ficticios: <a href="admin.html?demo">abrir demostración</a>.</p>
+      </div>
+
+      <p class="adm-acceso__pie"><i class="ph ph-lock-simple" aria-hidden="true"></i><span>Cada ingreso y cada cambio quedan registrados con el correo de quien lo hizo. Si no administras el colegio, usa la <a href="login.html" style="color:inherit">intranet de estudiantes y docentes</a>.</span></p>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/sesion.js"></script>
+  <script>
+    (function () {
+      const S = window.SESION, $ = (s) => document.querySelector(s);
+      const btn = $("#btnGoogle"), estado = $("#estado");
+      document.querySelectorAll("[data-dominio]").forEach((el) => { el.textContent = S.DOMINIO; });
+      const aviso = (t, tipo) => { estado.textContent = t; estado.dataset.tipo = tipo || ""; };
+      if (!S.conectada) { btn.disabled = true; $("#sinConectar").hidden = false; return; }
+
+      // Sin acceso: se cierra la sesión para no dejar una cuenta ajena abierta en este equipo
+      const rechazar = async (u) => {
+        $("#sinPermiso").hidden = false;
+        $("#sinPermisoTxt").textContent = `La cuenta ${u.email} no tiene acceso de administración. Si debería tenerlo, pídeselo a la dirección.`;
+        aviso("");
+        await S.salir();
+        revisando = null;
+        btn.disabled = false; btn.classList.remove("is-cargando");
+      };
+      const revisar = async (u) => {
+        aviso("Verificando permisos…");
+        if (await S.esAdmin(u)) { aviso("Acceso concedido. Entrando…", "ok"); location.replace("admin.html"); }
+        else rechazar(u);
+      };
+      // Cada cuenta se verifica una sola vez, venga del botón o de una sesión ya abierta
+      let revisando = null;
+      S.alCambiar((u) => { if (u && u.uid !== revisando) { revisando = u.uid; revisar(u); } });
+      $("#cambiar").addEventListener("click", () => { $("#sinPermiso").hidden = true; btn.focus(); });
+
+      const MENSAJES = {
+        "fya/dominio": "Esa cuenta no es institucional. Usa tu correo @" + S.DOMINIO + ".",
+        "auth/popup-closed-by-user": "Cerraste la ventana de Google antes de terminar.",
+        "auth/cancelled-popup-request": "",
+        "auth/popup-blocked": "El navegador bloqueó la ventana de Google. Permite ventanas emergentes e inténtalo otra vez.",
+        "auth/network-request-failed": "Sin conexión a internet.",
+        "auth/unauthorized-domain": "Esta dirección web no está autorizada en Firebase.",
+      };
+      btn.addEventListener("click", async () => {
+        btn.disabled = true; btn.classList.add("is-cargando"); $("#sinPermiso").hidden = true;
+        aviso("Abriendo la ventana de Google…");
+        try { const u = await S.entrar(); if (u.uid !== revisando) { revisando = u.uid; await revisar(u); } }
+        catch (e) { aviso(e.code in MENSAJES ? MENSAJES[e.code] : "No se pudo iniciar sesión. Inténtalo otra vez.", "error"); btn.disabled = false; btn.classList.remove("is-cargando"); }
+      });
+    })();
+  </script>
+</body>
+</html>

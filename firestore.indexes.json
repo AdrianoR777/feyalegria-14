@@ -1,0 +1,115 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "publicaciones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "oculto",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creado",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "publicaciones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "oculto",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "aula",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creado",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "publicaciones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "oculto",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "rol",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creado",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "publicaciones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "autor",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "oculto",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creado",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "publicaciones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "aula",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creado",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "publicaciones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "rol",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creado",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "publicaciones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "autor",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "creado",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

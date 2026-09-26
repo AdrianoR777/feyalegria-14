@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal docente | Fe y Alegría 14</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/aula.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <link rel="stylesheet" href="css/docente.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("fya14-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="pagina-perfil pagina-docente">
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="nav is-scrolled">
+    <div class="nav__inner container">
+      <a href="index.html" class="brand" aria-label="Fe y Alegría 14, inicio">
+        <img class="brand__logo" src="img/logo.png" alt="" width="40" height="50">
+        <span class="brand__text" translate="no">Fe y Alegría 14<small>Portal docente</small></span>
+      </a>
+      <nav class="nav__links" id="menu" aria-label="Portal docente">
+        <a href="#panel" data-tab-link="asistencia" style="--n:0">Asistencia</a>
+        <a href="#panel" data-tab-link="notas" style="--n:1">Notas</a>
+        <a href="#panel" data-tab-link="justificaciones" style="--n:2">Justificaciones</a>
+        <a href="#panel" data-tab-link="resumen" style="--n:3">Resumen</a>
+        <a href="comunidad.html" style="--n:4">El Patio</a>
+        <a href="index.html" style="--n:5">Web del colegio</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro u oscuro"><i class="ph ph-moon" aria-hidden="true"></i></button>
+        <button class="btn btn--ghost btn--sm" id="btnSalir" type="button"><i class="ph ph-sign-out" aria-hidden="true"></i><span class="hide-sm">Cerrar sesión</span></button>
+        <button class="icon-btn burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="aviso-ejemplo container" id="avisoDemo" role="note" hidden>
+    <i class="ph ph-info" aria-hidden="true"></i>
+    <p><strong>Demostración.</strong> Docente y estudiantes ficticios. Los cambios se guardan solo en esta pestaña y se pierden al cerrarla.</p>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <div class="container perfil-cargando" id="cargando" role="status"><span class="giro" aria-hidden="true"></span> Cargando tu portal…</div>
+
+    <div class="container perfil-vacio" id="vacio" hidden>
+      <i class="ph ph-lock-key" aria-hidden="true"></i>
+      <h1 id="vacioTitulo"></h1>
+      <p id="vacioTexto"></p>
+      <div class="perfil-vacio__acciones">
+        <button class="btn btn--primary" type="button" data-salir>Cambiar de cuenta</button>
+        <a class="btn btn--ghost" href="index.html">Ir a la web del colegio</a>
+      </div>
+    </div>
+
+    <div id="perfil" hidden>
+      <!-- CABECERA -->
+      <section class="perfil-hero doc-hero" aria-labelledby="docNombre">
+        <div class="container">
+          <div class="perfil-quien">
+            <span class="perfil-avatar" id="avatar" aria-hidden="true"></span>
+            <div>
+              <p class="perfil-saludo" id="saludo"></p>
+              <h1 id="docNombre"></h1>
+              <ul class="perfil-meta" id="docMeta"></ul>
+            </div>
+          </div>
+
+          <div class="doc-aulas" role="group" aria-label="Mis aulas" id="docAulas"></div>
+        </div>
+      </section>
+
+      <!-- RESUMEN DEL AULA -->
+      <section class="container doc-kpis" aria-label="Resumen del aula" id="docKpis"></section>
+
+      <!-- PANEL CON PESTAÑAS -->
+      <section class="section section--aula" id="panel" aria-labelledby="panelTitulo">
+        <div class="container">
+          <h2 class="sr-only" id="panelTitulo">Gestión del aula</h2>
+          <div class="doc-tabs" role="tablist" aria-label="Gestión del aula" id="docTabs">
+            <button role="tab" type="button" id="tab-asistencia" aria-controls="p-asistencia" data-tab="asistencia"><i class="ph ph-calendar-check" aria-hidden="true"></i>Asistencia</button>
+            <button role="tab" type="button" id="tab-notas" aria-controls="p-notas" data-tab="notas"><i class="ph ph-exam" aria-hidden="true"></i>Notas</button>
+            <button role="tab" type="button" id="tab-justificaciones" aria-controls="p-justificaciones" data-tab="justificaciones"><i class="ph ph-file-text" aria-hidden="true"></i>Justificaciones<span class="doc-tabs__n" id="nPend" hidden></span></button>
+            <button role="tab" type="button" id="tab-resumen" aria-controls="p-resumen" data-tab="resumen"><i class="ph ph-chart-bar" aria-hidden="true"></i>Resumen</button>
+          </div>
+
+          <!-- ASISTENCIA -->
+          <div class="doc-panel" role="tabpanel" id="p-asistencia" aria-labelledby="tab-asistencia">
+            <div class="doc-bloqueo" data-solo-tutor hidden><i class="ph ph-lock-simple" aria-hidden="true"></i><p>Solo el tutor del aula registra la asistencia. Aquí puedes consultarla.</p></div>
+            <div class="doc-barra">
+              <div class="field doc-fecha">
+                <label for="asisFecha">Fecha</label>
+                <input type="date" id="asisFecha">
+              </div>
+              <p class="doc-barra__estado" id="asisEstado" role="status"></p>
+              <div class="doc-barra__acciones" data-editable>
+                <button class="btn btn--ghost btn--sm" type="button" id="todosPresentes"><i class="ph ph-checks" aria-hidden="true"></i>Todos presentes</button>
+              </div>
+            </div>
+            <ul class="doc-conteo" id="asisConteo" aria-label="Conteo del día"></ul>
+            <ol class="lista-asis" id="listaAsis"></ol>
+          </div>
+
+          <!-- NOTAS -->
+          <div class="doc-panel" role="tabpanel" id="p-notas" aria-labelledby="tab-notas" hidden>
+            <div class="doc-bloqueo" data-sin-area hidden><i class="ph ph-lock-simple" aria-hidden="true"></i><p>No dictas ningún área en esta aula, por eso no puedes registrar notas aquí.</p></div>
+            <div class="doc-barra">
+              <div class="field">
+                <label for="notaArea">Área</label>
+                <select id="notaArea"></select>
+              </div>
+              <p class="doc-barra__estado" id="notaEstado" role="status"></p>
+            </div>
+            <div class="notas-wrap"><table class="notas doc-notas" id="tablaNotasDoc"></table></div>
+          </div>
+
+          <!-- JUSTIFICACIONES -->
+          <div class="doc-panel" role="tabpanel" id="p-justificaciones" aria-labelledby="tab-justificaciones" hidden>
+            <div class="doc-bloqueo" data-solo-tutor hidden><i class="ph ph-lock-simple" aria-hidden="true"></i><p>Las justificaciones las revisa el tutor del aula.</p></div>
+            <div class="doc-barra">
+              <div class="filtro-inc" role="group" aria-label="Filtrar justificaciones" id="justFiltro">
+                <button type="button" aria-pressed="true" data-f="pendiente">En revisión <span data-n="pendiente"></span></button>
+                <button type="button" aria-pressed="false" data-f="observada">Observadas <span data-n="observada"></span></button>
+                <button type="button" aria-pressed="false" data-f="aprobada">Aprobadas <span data-n="aprobada"></span></button>
+                <button type="button" aria-pressed="false" data-f="sin">Faltas sin justificar <span data-n="sin"></span></button>
+              </div>
+            </div>
+            <ul class="justs" id="docJusts"></ul>
+          </div>
+
+          <!-- RESUMEN -->
+          <div class="doc-panel" role="tabpanel" id="p-resumen" aria-labelledby="tab-resumen" hidden>
+            <div class="doc-barra">
+              <p class="doc-barra__estado">Asistencia acumulada del año por estudiante. Se marcan en rojo quienes tienen 3 faltas o más, o menos de 90 % de asistencia.</p>
+              <button class="btn btn--ghost btn--sm" type="button" id="exportarCsv"><i class="ph ph-download-simple" aria-hidden="true"></i>Descargar CSV</button>
+            </div>
+            <div class="notas-wrap"><table class="notas doc-resumen" id="tablaResumen"></table></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Barra de guardado: aparece cuando hay cambios sin guardar -->
+  <div class="guardar-barra" id="guardarBarra" hidden>
+    <div class="container guardar-barra__in">
+      <p><i class="ph ph-pencil-simple" aria-hidden="true"></i><span id="guardarTexto"></span></p>
+      <div>
+        <button class="btn btn--ghost btn--sm" type="button" id="descartar">Descartar</button>
+        <button class="btn btn--primary btn--sm" type="button" id="guardar"><i class="ph ph-floppy-disk" aria-hidden="true"></i>Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Observar una justificación -->
+  <dialog class="doc-dialog" id="dlgObs" aria-labelledby="dlgObsTitulo">
+    <form method="dialog" id="formObs">
+      <h2 id="dlgObsTitulo">Observar justificación</h2>
+      <p id="dlgObsSub"></p>
+      <div class="field">
+        <label for="obsTexto">Qué debe corregir o completar la familia</label>
+        <textarea id="obsTexto" rows="3" required maxlength="300"></textarea>
+        <small class="error" id="obsErr" aria-live="polite"></small>
+      </div>
+      <div class="doc-dialog__acciones">
+        <button class="btn btn--ghost btn--sm" type="button" value="cancel" id="obsCancelar">Cancelar</button>
+        <button class="btn btn--primary btn--sm" type="submit" value="ok">Enviar observación</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Registrar justificación presentada en secretaría -->
+  <dialog class="doc-dialog" id="dlgJust" aria-labelledby="dlgJustTitulo">
+    <form method="dialog" id="formJust">
+      <h2 id="dlgJustTitulo">Registrar justificación</h2>
+      <p id="dlgJustSub"></p>
+      <div class="field">
+        <label for="jMotivo">Motivo</label>
+        <input id="jMotivo" required maxlength="150" placeholder="Ej.: Cita médica…">
+      </div>
+      <div class="form__row">
+        <div class="field">
+          <label for="jPor">Presentada por</label>
+          <select id="jPor"><option>Madre de familia</option><option>Padre de familia</option><option>Apoderado</option></select>
+        </div>
+        <div class="field">
+          <label for="jFecha">Fecha de presentación</label>
+          <input type="date" id="jFecha" required>
+        </div>
+      </div>
+      <label class="doc-check"><input type="checkbox" id="jAprobar" checked> Aprobar ahora (el documento está completo)</label>
+      <small class="error" id="jErr" aria-live="polite"></small>
+      <div class="doc-dialog__acciones">
+        <button class="btn btn--ghost btn--sm" type="button" id="jCancelar">Cancelar</button>
+        <button class="btn btn--primary btn--sm" type="submit">Registrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <footer class="footer footer--mini">
+    <div class="container footer__bottom">
+      <span>© 2026 I.E. Fe y Alegría 14. Portal docente.</span>
+      <span>Cada cambio queda registrado con tu correo.</span>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/sesion.js"></script>
+  <script src="js/data-aulas.js"></script>
+  <script src="js/calendario.js"></script>
+  <script src="js/docente.js"></script>
+</body>
+</html>

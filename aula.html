@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal del aula | Fe y Alegría 14</title>
+  <meta name="description" content="Portal de cada aula de la I.E. Fe y Alegría 14: horario, tareas, comunicados, docentes y proyecto del bimestre.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/aula.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("fya14-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="pagina-aula">
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="brand" aria-label="Fe y Alegría 14, inicio">
+        <img class="brand__logo" src="img/logo.png" alt="" width="40" height="50">
+        <span class="brand__text" translate="no">Fe y Alegría 14<small>Nuevo Chimbote</small></span>
+      </a>
+      <nav class="nav__links" id="menu" aria-label="Principal">
+        <a href="index.html#nosotros" style="--n:0">Nosotros</a>
+        <a href="index.html#niveles" style="--n:1">Niveles</a>
+        <a href="index.html#aulas" class="is-current" aria-current="page" style="--n:2">Aulas</a>
+        <a href="index.html#admision" style="--n:3">Admisión</a>
+        <a href="index.html#vida" style="--n:4">Noticias</a>
+        <a href="index.html#contacto" style="--n:5">Contacto</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro u oscuro"><i class="ph ph-moon" aria-hidden="true"></i></button>
+        <a class="icon-btn" href="login.html" aria-label="Intranet de estudiantes y docentes" title="Intranet"><i class="ph ph-user-circle" aria-hidden="true"></i></a>
+        <a href="index.html#aulas" class="btn btn--primary btn--sm hide-sm hide-md">Todas las aulas</a>
+        <button class="icon-btn burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- PORTADA DEL AULA -->
+    <section class="aula-hero" aria-labelledby="aulaTitulo">
+      <img class="aula-hero__fondo" id="aulaFondo" src="img/colegio-3.jpg" width="596" height="335" alt="">
+      <div class="container aula-hero__grid">
+        <div class="aula-hero__copy">
+          <nav class="migas load" style="--d:0" aria-label="Estás en">
+            <a href="index.html">Inicio</a><i class="ph ph-caret-right" aria-hidden="true"></i>
+            <a href="index.html#aulas">Aulas</a><i class="ph ph-caret-right" aria-hidden="true"></i>
+            <span id="migaNivel">Primaria</span>
+          </nav>
+          <div class="aula-marca load" style="--d:1" aria-hidden="true">
+            <span class="aula-marca__grado" id="marcaGrado">1.°</span><span class="aula-marca__sec" id="marcaSec">A</span>
+          </div>
+          <h1 class="load" style="--d:2" id="aulaTitulo">1.° grado A</h1>
+          <p class="aula-hero__lema load" style="--d:3" id="aulaLema"></p>
+          <ul class="aula-datos load" style="--d:4" id="aulaDatos"></ul>
+        </div>
+        <aside class="tutor load" style="--d:3" aria-labelledby="tutorNombre">
+          <span class="tutor__avatar" id="tutorIniciales" aria-hidden="true"></span>
+          <div>
+            <p class="tutor__rol">Tutoría del aula</p>
+            <h2 class="tutor__nombre" id="tutorNombre"></h2>
+            <p class="tutor__nota">Atención a padres: viernes, al terminar el turno, previa cita por la agenda.</p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Cambiar de aula -->
+      <div class="container">
+        <div class="cambio load" style="--d:5">
+          <div class="cambio__secs" role="group" aria-label="Otras secciones del mismo grado" id="cambioSecs"></div>
+          <div class="cambio__grados">
+            <a class="icon-btn cambio__flecha" id="gradoAnterior" href="#"><i class="ph ph-caret-left" aria-hidden="true"></i></a>
+            <label class="sr-only" for="saltoAula">Ir a otra aula</label>
+            <select id="saltoAula" class="cambio__select"></select>
+            <a class="icon-btn cambio__flecha" id="gradoSiguiente" href="#"><i class="ph ph-caret-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="aviso-ejemplo container" role="note">
+      <i class="ph ph-info" aria-hidden="true"></i>
+      <p><strong>Contenido de ejemplo.</strong> Docentes, horario, tareas y comunicados son referenciales hasta que el colegio cargue los datos reales de cada aula.</p>
+    </div>
+
+    <!-- ESTA SEMANA -->
+    <section class="section section--aula" aria-labelledby="semanaTitulo">
+      <div class="container semana">
+        <div class="semana__tareas">
+          <header class="section-head reveal">
+            <h2 id="semanaTitulo">Esta semana</h2>
+            <p>Tareas y evaluaciones con fecha de entrega.</p>
+          </header>
+          <ol class="tareas" id="tareas"></ol>
+        </div>
+        <div class="semana__avisos reveal" data-reveal="right">
+          <h3 class="bloque-titulo"><i class="ph ph-megaphone" aria-hidden="true"></i> Comunicados</h3>
+          <ul class="avisos" id="avisos"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HORARIO -->
+    <section class="section section--aula horario-sec" aria-labelledby="horarioTitulo">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="horarioTitulo">Horario de clases</h2>
+          <p id="horarioSub"></p>
+        </header>
+        <div class="dias-tabs" role="tablist" aria-label="Día" id="diasTabs"></div>
+        <div class="horario-wrap reveal">
+          <table class="horario" id="horario"></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTO + DOCENTES -->
+    <section class="section section--aula" aria-labelledby="proyectoTitulo">
+      <div class="container proyecto-grid">
+        <article class="proyecto reveal" data-reveal="left">
+          <div class="proyecto__foto"><img id="proyectoFoto" width="900" height="600" src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=900&q=75" alt="Niños de primaria escribiendo en sus cuadernos" data-fallback="fya14-proyecto" loading="lazy"></div>
+          <div class="proyecto__cuerpo">
+            <p class="tag">Proyecto del bimestre</p>
+            <h2 id="proyectoTitulo"></h2>
+            <p id="proyectoTexto"></p>
+            <div class="avance" id="avance">
+              <div class="avance__cab"><span>Avance del aula</span><b id="avanceN">0%</b></div>
+              <div class="avance__barra"><span id="avanceBarra"></span></div>
+            </div>
+          </div>
+        </article>
+        <div class="docentes reveal" data-reveal="right">
+          <h3 class="bloque-titulo"><i class="ph ph-chalkboard-teacher" aria-hidden="true"></i> Áreas y docentes</h3>
+          <ul class="areas" id="areas"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a href="index.html" class="brand brand--footer"><img class="brand__logo" src="img/logo.png" alt="" width="40" height="50"><span class="brand__text" translate="no">Fe y Alegría 14<small>Nuevo Chimbote, Áncash</small></span></a>
+        <p>Movimiento de Educación Popular Integral y Promoción Social.</p>
+      </div>
+      <div><h3>Colegio</h3><a href="index.html#nosotros">Nosotros</a><a href="index.html#niveles">Niveles</a><a href="index.html#aulas">Aulas</a></div>
+      <div><h3>Familias</h3><a href="index.html#ingresantes">Buscar ingresante</a><a href="index.html#admision">Admisión</a><a href="index.html#contacto">Contacto</a></div>
+      <div><h3>Turnos</h3><p>Primaria: mañana<br>Secundaria: tarde</p></div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© 2026 I.E. Fe y Alegría 14</span>
+      <span>Portal de aulas con contenido de ejemplo. Fotos referenciales.</span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba"><i class="ph ph-arrow-up" aria-hidden="true"></i></button>
+
+  <script src="js/data-aulas.js"></script>
+  <script src="js/aula.js"></script>
+</body>
+</html>

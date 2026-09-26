@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El Patio | Comunidad Fe y Alegría 14</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/aula.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <link rel="stylesheet" href="css/comunidad.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("fya14-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="pagina-patio">
+  <a class="skip" href="#feed">Saltar a las publicaciones</a>
+
+  <header class="nav is-scrolled">
+    <div class="nav__inner container patio-contenedor">
+      <a href="comunidad.html" class="brand" aria-label="El Patio, inicio de la comunidad">
+        <img class="brand__logo" src="img/logo.png" alt="" width="40" height="50">
+        <span class="brand__text"><span>El Patio</span><small translate="no">Comunidad Fe y Alegría 14</small></span>
+      </a>
+      <nav class="nav__links" id="menu" aria-label="Principal">
+        <a href="comunidad.html" class="is-current" style="--n:0">Comunidad</a>
+        <a href="#" id="linkIntranet" style="--n:1">Mi intranet</a>
+        <a href="index.html" style="--n:2">Web del colegio</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro u oscuro"><i class="ph ph-moon" aria-hidden="true"></i></button>
+        <a class="patio-yo-mini" id="yoMini" href="#" aria-label="Mi perfil en la comunidad"></a>
+        <button class="icon-btn burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="aviso-ejemplo container patio-contenedor" id="avisoDemo" role="note" hidden>
+    <i class="ph ph-info" aria-hidden="true"></i>
+    <p><strong>Demostración.</strong> Personas y publicaciones ficticias. Lo que publiques aquí queda solo en esta pestaña. <a class="link" id="cambiarRolDemo" href="#"></a></p>
+  </div>
+
+  <div class="container perfil-cargando" id="cargando" role="status"><span class="giro" aria-hidden="true"></span> Entrando al Patio…</div>
+  <div class="container perfil-vacio" id="vacio" hidden>
+    <i class="ph ph-lock-key" aria-hidden="true"></i>
+    <h1 id="vacioTitulo"></h1>
+    <p id="vacioTexto"></p>
+    <div class="perfil-vacio__acciones"><a class="btn btn--primary" href="login.html">Ir al login</a></div>
+  </div>
+
+  <div class="patio container patio-contenedor" id="app" hidden>
+    <!-- IZQUIERDA: quién soy y filtros -->
+    <aside class="patio-izq" aria-label="Mi cuenta y filtros">
+      <a class="yo-card" id="yoCard" href="#"></a>
+      <nav class="filtros" aria-label="Qué publicaciones ver" id="filtros"></nav>
+      <section class="normas-mini" aria-labelledby="normasTit">
+        <h2 id="normasTit"><i class="ph ph-hand-heart" aria-hidden="true"></i> Normas del Patio</h2>
+        <ol>
+          <li>Respeto siempre. Nada de burlas, apodos ni insultos.</li>
+          <li>No compartas datos personales: dirección, teléfono ni contraseñas.</li>
+          <li>Publica solo fotos de personas que te dieron permiso.</li>
+          <li>Si algo te incomoda, repórtalo. Un docente lo revisa.</li>
+        </ol>
+      </section>
+    </aside>
+
+    <!-- CENTRO: publicar y publicaciones -->
+    <main class="patio-centro" id="feed" tabindex="-1">
+      <!-- Perfil de una persona (comunidad.html?u=correo) -->
+      <section class="perfil-social" id="perfilSocial" hidden aria-labelledby="psNombre"></section>
+
+      <!-- Publicar -->
+      <form class="compositor" id="compositor" novalidate>
+        <div class="compositor__cab">
+          <span class="avatar" id="compAvatar" aria-hidden="true"></span>
+          <label class="sr-only" for="compTexto">Escribe tu publicación</label>
+          <textarea id="compTexto" rows="1" maxlength="2000" placeholder="¿Qué quieres compartir?"></textarea>
+        </div>
+        <div class="compositor__encuesta" id="compEncuesta" hidden>
+          <div class="field"><label for="encPregunta">Pregunta de la encuesta</label><input id="encPregunta" maxlength="200" placeholder="Ej.: ¿Qué taller quieren el próximo bimestre?"></div>
+          <div class="enc-opciones" id="encOpciones"></div>
+          <button type="button" class="link" id="encMas"><i class="ph ph-plus" aria-hidden="true"></i> Agregar opción</button>
+        </div>
+        <ul class="compositor__adjuntos" id="compAdjuntos" aria-label="Archivos adjuntos"></ul>
+        <p class="compositor__error" id="compError" role="alert"></p>
+        <div class="compositor__pie">
+          <div class="compositor__herr">
+            <input type="file" id="inFoto" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden>
+            <input type="file" id="inVideo" accept="video/mp4,video/webm,video/quicktime" hidden>
+            <button type="button" class="herr" data-herr="foto"><i class="ph ph-image" aria-hidden="true"></i><span>Foto</span></button>
+            <button type="button" class="herr" data-herr="video"><i class="ph ph-video-camera" aria-hidden="true"></i><span>Video</span></button>
+            <button type="button" class="herr" data-herr="encuesta" aria-pressed="false"><i class="ph ph-chart-bar-horizontal" aria-hidden="true"></i><span>Encuesta</span></button>
+          </div>
+          <span class="compositor__cuenta" id="compCuenta" aria-live="polite"></span>
+          <button type="submit" class="btn btn--primary btn--sm" id="btnPublicar"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>Publicar</button>
+        </div>
+        <div class="compositor__progreso" id="compProgreso" hidden><span></span></div>
+      </form>
+
+      <button type="button" class="nuevas" id="nuevas" hidden><i class="ph ph-arrow-up" aria-hidden="true"></i> <span></span></button>
+      <h2 class="sr-only" id="feedTitulo">Publicaciones</h2>
+      <ol class="feed" id="lista" aria-labelledby="feedTitulo"></ol>
+      <div class="feed-pie">
+        <button type="button" class="btn btn--ghost" id="verMas" hidden>Ver más publicaciones</button>
+        <p class="feed-fin" id="feedFin" hidden>Llegaste al final. ¡Comparte algo tú también!</p>
+      </div>
+    </main>
+
+    <!-- DERECHA: actividad y moderación -->
+    <aside class="patio-der" aria-label="Actividad">
+      <section class="panel-der" id="panelReportes" hidden aria-labelledby="repTit">
+        <h2 id="repTit"><i class="ph ph-flag" aria-hidden="true"></i> Reportes por revisar</h2>
+        <ul class="reportes" id="reportes"></ul>
+      </section>
+      <section class="panel-der" aria-labelledby="actTit">
+        <h2 id="actTit"><i class="ph ph-fire" aria-hidden="true"></i> Aulas más activas</h2>
+        <ol class="ranking" id="ranking"></ol>
+      </section>
+      <section class="panel-der panel-der--foto" aria-label="El colegio">
+        <img src="img/colegio-1.jpg" width="615" height="325" alt="Patio techado del colegio con palmera y aulas de ladrillo" loading="lazy">
+        <p>El Patio es solo para cuentas <strong>@feyalegria14.edu.pe</strong>. Nadie de fuera del colegio ve lo que se publica aquí.</p>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Ver foto en grande -->
+  <dialog class="visor" id="visor" aria-label="Foto en grande">
+    <button type="button" class="visor__cerrar icon-btn" id="visorCerrar" aria-label="Cerrar"><i class="ph ph-x" aria-hidden="true"></i></button>
+    <button type="button" class="visor__nav visor__nav--ant icon-btn" id="visorAnt" aria-label="Foto anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+    <img id="visorImg" src="img/logo.png" alt="">
+    <button type="button" class="visor__nav visor__nav--sig icon-btn" id="visorSig" aria-label="Foto siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+  </dialog>
+
+  <!-- Reportar -->
+  <dialog class="doc-dialog" id="dlgReporte" aria-labelledby="dlgRepTit">
+    <form method="dialog" id="formReporte">
+      <h2 id="dlgRepTit">Reportar publicación</h2>
+      <p>Un docente la revisará. Quien publicó no sabrá que fuiste tú.</p>
+      <fieldset class="rep-motivos">
+        <legend class="sr-only">Motivo</legend>
+        <label><input type="radio" name="motivo" value="Burla o acoso" checked> Burla o acoso</label>
+        <label><input type="radio" name="motivo" value="Contenido inapropiado"> Contenido inapropiado</label>
+        <label><input type="radio" name="motivo" value="Datos personales expuestos"> Datos personales expuestos</label>
+        <label><input type="radio" name="motivo" value="Foto sin permiso"> Foto de alguien sin permiso</label>
+        <label><input type="radio" name="motivo" value="Otro"> Otro motivo</label>
+      </fieldset>
+      <div class="doc-dialog__acciones">
+        <button class="btn btn--ghost btn--sm" type="button" id="repCancelar">Cancelar</button>
+        <button class="btn btn--primary btn--sm" type="submit">Enviar reporte</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/sesion.js"></script>
+  <script src="js/data-aulas.js"></script>
+  <script src="js/comunidad.js"></script>
+</body>
+</html>

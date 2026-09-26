@@ -1,0 +1,115 @@
+/* =========================================================
+   Tokens de diseño: Fe y Alegría 14
+   Paleta tomada del escudo y del banner del colegio.
+   Escala tipográfica 1.25 sobre 17px. Espaciado base 4px.
+   ========================================================= */
+:root {
+  /* Identidad Fe y Alegría: rojo del corazón (amor, vida, entrega a la niñez y la juventud)
+     sobre blanco (paz, transparencia, rectitud). El blanco domina; el rojo marca y guía la acción. */
+  --red-700: #a3121b;
+  --red-600: #cf1b24;   /* rojo corazón: marca y acción principal */
+  --red-500: #e8383f;
+  --red-100: #fbdcdd;
+  --red-50: #fdf1f1;
+  /* Colores de apoyo solo para distinguir secciones A, B, C y D en los portales de aula */
+  --navy-900: #133a56;
+  --navy-800: #1f5579;
+  --navy-100: #d9e6f0;
+  --navy-50: #edf3f8;
+  --sun: #f5b024;
+  --sun-600: #c98712;
+  --sun-100: #fdefcf;
+  --brown-900: #1a1414; /* tinta cálida para el pie de página */
+  --cream-50: #ffffff;
+  --cream-100: #fdf1f1;
+
+  /* Roles: blanco puro de base, grises cálidos muy suaves para separar */
+  --paper: #ffffff;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f7f4f4;
+  --ink: #1a1414;
+  --muted: #56504f;
+  --line: #ebe5e5;
+  /* Etiquetas e información en el mismo rojo, en versión suave */
+  --info: var(--red-600);
+  --info-soft: var(--red-50);
+  --info-text: var(--red-700);
+  --primary: var(--red-600);
+  --primary-strong: var(--red-700);
+  --on-primary: #ffffff;
+  --focus: #1a1414;
+  --placeholder: #5f6b77;
+  --error: #b3261e;
+  --grid: rgb(207 27 36 / .06);
+  --margin-red: rgb(207 27 36 / .5);
+
+  /* Tipografía */
+  --font-display: "Bricolage Grotesque", "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --fs-sm: .875rem;      /* 14 */
+  --fs-body: 1.0625rem;  /* 17 */
+  --fs-lead: 1.3125rem;  /* 21 */
+  --fs-h3: 1.6875rem;    /* 27 */
+  --fs-h2: clamp(2.125rem, 3.4vw, 2.625rem); /* 34 a 42 */
+  --fs-h1: clamp(2.5rem, 5.2vw, 4rem);       /* 40 a 64 */
+  --w-thin: 200;
+  --w-black: 800;
+
+  /* Espaciado (base 4px) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-6: 24px;
+  --s-8: 32px; --s-12: 48px; --s-16: 64px; --s-24: 96px;
+  --section: clamp(64px, 9vw, 96px);
+  --container: 1200px;
+  --cell: 28px;
+
+  /* Forma */
+  --r-sm: 8px; --r: 12px; --r-lg: 16px; --r-pill: 999px;
+  --shadow: 0 1px 2px rgb(58 34 21 / .06), 0 8px 20px -10px rgb(58 34 21 / .2);
+  --shadow-lg: 0 24px 48px -20px rgb(58 34 21 / .32);
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-in-out: cubic-bezier(.77, 0, .175, 1);
+  --t-press: .16s;
+  --t-hover: .24s;
+  --t-reveal: .7s;
+
+  /* Capas */
+  --z-raised: 2; --z-sticky: 50; --z-progress: 60; --z-float: 40; --z-intro: 100; --z-skip: 110;
+
+  --nav-h: 72px;
+  color-scheme: light;
+}
+
+/* Modo oscuro: carbón cálido neutro; el rojo del corazón sigue siendo la única voz de color */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #151213; --bg: #121011; --surface: #1b1718; --surface-2: #241f20;
+    --ink: #f3efee; --muted: #b5acaa; --line: #332c2d;
+    --primary: #ff5a5f; --primary-strong: #ff7b7f; --on-primary: #1a0708;
+    --red-50: #2a1517; --red-100: #40191c; --red-700: #ffa3a5;
+    --navy-50: #13263a; --navy-100: #1a3350;
+    --info: #ff8a8d; --info-soft: #2a1517; --info-text: #ffb3b5;
+    --sun-100: #3b2d12; --cream-50: #151213; --cream-100: #241f20;
+    --focus: #ffffff; --placeholder: #a79e9c; --error: #ff9d8f;
+    --grid: rgb(255 90 95 / .06); --margin-red: rgb(255 90 95 / .45);
+    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 8px 20px -10px rgb(0 0 0 / .6);
+    --shadow-lg: 0 24px 48px -20px rgb(0 0 0 / .7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #151213; --bg: #121011; --surface: #1b1718; --surface-2: #241f20;
+  --ink: #f3efee; --muted: #b5acaa; --line: #332c2d;
+  --primary: #ff5a5f; --primary-strong: #ff7b7f; --on-primary: #1a0708;
+  --red-50: #2a1517; --red-100: #40191c; --red-700: #ffa3a5;
+  --navy-50: #13263a; --navy-100: #1a3350;
+  --info: #ff8a8d; --info-soft: #2a1517; --info-text: #ffb3b5;
+  --sun-100: #3b2d12; --cream-50: #151213; --cream-100: #241f20;
+  --focus: #ffffff; --placeholder: #a79e9c; --error: #ff9d8f;
+  --grid: rgb(255 90 95 / .06); --margin-red: rgb(255 90 95 / .45);
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 8px 20px -10px rgb(0 0 0 / .6);
+  --shadow-lg: 0 24px 48px -20px rgb(0 0 0 / .7);
+  color-scheme: dark;
+}
